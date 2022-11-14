@@ -776,3 +776,87 @@ desc employees;
 
 alter table employees enable row movement;
 flashback table employees to timestamp to_timestamp('14-11-2022 14:00:00','dd-mm-yyyy hh24:mi:ss');
+/
+
+declare 
+ile number:=1000;
+nr_departamentu integer:=90;
+begin
+update employees set salary=salary+ile where department_id=nr_departamentu;
+dbms_output.put_line('zmieniono '||sql%rowcount||' wierszy');
+commit;
+end;
+/
+
+
+create table owoce(
+nr_owocu integer primary key,
+nazwa_owocu varchar2(4000)
+);
+
+
+insert into owoce values (1,'Banan');
+insert into owoce values (2,'Mandarynka');
+select * from owoce;
+
+create sequence moja;
+
+select moja.nextval from dual;
+
+create sequence owocowa start with 3 ;
+create sequence owocowa start with 3 increment by 1;
+
+insert into owoce values (owocowa.nextval,'XXXXX');
+select * from owoce;
+
+
+create sequence faktury_seq;
+
+create table faktury (
+id_faktury integer primary key,
+numer_faktury varchar2(4000)
+);
+
+create table produkty_na_fakturach (
+id_pnf integer primary key,
+nazwa varchar2(4000),
+id_faktury integer references faktury(id_faktury)
+);
+
+begin
+insert into faktury values (faktury_seq.nextval,'01/01/2022');
+insert into produkty_na_fakturach values (faktury_seq.nextval,'Bulbulator',);
+end;
+
+select owocowa.currval from dual;
+select owocowa.nextval from dual;
+/
+
+declare
+id integer;
+begin
+id:=faktury_seq.nextval;
+insert into faktury values (id,'01/01/2022');
+insert into produkty_na_fakturach values (faktury_seq.nextval,'Bulbulator',id);
+end;
+
+select * from faktury;
+select * from produkty_na_fakturach;
+
+
+
+declare
+id integer;
+begin
+insert into faktury values (faktury_seq.nextval,'01/01/2022') returning id_faktury into id;
+insert into produkty_na_fakturach values (faktury_seq.nextval,'Bulbulator',id);
+commit;
+end;
+/
+
+select * from regions;
+/*12.
+Napisz program ktory bedzie dodawal wiersze do tabeli regions. Nazwa regionu ma zostac podana przez 
+uzytkownika (przez zmienn¹). Numer regionu ma zostac podany z sekwencji a nastepnie po zapisie wiersza wyswietlony na konsoli.
+(Chcemy uzyskac region_id pod jakim wyladowal nowo dodany region)
+*/
