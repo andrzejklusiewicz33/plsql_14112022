@@ -1,0 +1,266 @@
+PODSTAWY PODSTAW
+*. Stwórz blok anonimowy który przyjmie poprzez zmienne twoje imie oraz nazwisko, a nastepnie wyswietli komunikat typu witaj twoje_imie twoje_nazwisko!
+
+ARYTMETYKA I UZYCIE FUNKCJI JEDNOWIERSZOWYCH
+*.  napisz program który przyjmie przez zmienne wzrost w metrach i masę w kilogramach a nastepnie 
+wyliczy i wypisze zaokraglone do 2 miejsc po przecinku bmi wg. wzoru masa/(wzrost*wzrost)
+*.  napisz program który obliczy i wyświetli ilość dni jaka upłynela od bitwy pod Grunwaldem
+
+IFY
+*. Napisz blok anonimowy który przyjmie przez zmienną wartość liczbową i wypisze czy wartość ta jest mniejsza, równa czy większa niż 0.
+**. Napisz program który przyjmie od uzytkownika jego wzrost i masę, obliczy bmi i wyswietli stosowny opis wg. Wikipedii
+
+PETLE
+*. Wyświetl 20 kolejnych potęg liczby 2
+*. Wyświetl kolejne setki od 0 do 2000
+*. Wyświetl co druga wartosc z zakresu 1-100 (pokazać modulo)
+*. Wypisz liczby w zakresie 1-100 obok kazdej piszac czy jest parzysta czy nie
+***. Napisz symulator lokaty. Symulator ma przez zmienne przyjac kwote lokowana, ilosc miesiecy 
+na ktora zakladamy lokatę i oprocentowanie w skali roku. Zakladamy comiesieczna kapitalizacje 
+odsetek. Dla kazdego miesiaca trwania lokaty wyswietl ktory to miesiac i ile mamy odlozone na 
+lokacie. 
+*. Korzystajac z petli while lub exit when wyswietlaj kolejne potegi liczby dwa az potega nie wyniesie wiecej niz 10000
+**. Napisz program który będzie dodawał kolejne wartości losowe do sumy (wypisując ile dodał i ile wynosi suma)
+tak długo aż suma nie przekroczy wartości podanej przez użytkownika. Wartość losowa:
+execute dbms_output.put_line(round(dbms_random.value(1,1000)));
+***. Napisz symulator splaty dlugow. Symulator ma przyjac przez zmienne :
+- ile zostalo do splaty
+- oprocentowanie pozyczki w skali roku
+- kwota raty jaka miesiecznie splacamy.
+Symulator ma wypisywac kolejne miesiac do czasu splaty calej pozyczki.
+Przy kazdym miesiacu nalezy doliczyc odsetki do kwoty pozostalej do splaty,
+a nastepnie odliczyc miesieczna ratę. Przy kazdym miesiacu wypisz ile jeszcze pozostalo do splaty.
+
+DML i RETURNING INTO
+**. Napisz program ktory bedzie dawal podwyzki. Kwota podwyzki oraz numer departamentu dla ktorego 
+zostanie zastosowana podwyzka maja zostac podane przez uzytkownika
+**. Napisz program ktory bedzie dodawal wiersze do tabeli regions. Nazwa regionu ma zostac podana przez 
+uzytkownika. Numer regionu ma zostac podany z sekwencji a nastepnie po zapisie wiersza wyswietlony na konsoli.
+(Chcemy uzyskac region_id pod jakim wyladowal nowo dodany region)
+
+SELECT INTO
+*. Wczytaj do zmiennej a następnie wyświetl ilość osób w departamencie którego numer zostanie podany 
+przez uzytkownika
+**. Wczytaj do zmiennych i wyświetl średnią zarobków i sumę zarobków.
+**. Wczytaj do zmiennych i wyświetl w osobnych liniach imię, nazwisko i telefon osoby której numer pracownika poda użytkownik.
+***. Wczytaj do zmiennej i wyświetl na konsoli różnicę pomiędzy najwyższymi i najniższymi zarobkami 
+w departamencie którego nazwę przekaze użytkownik. Program ma być niewrażliwy na wielkość liter 
+w nazwie departamentu.
+
+TYPY WIERSZOWE I REKORDOWE
+*. Wczytaj do zmiennej caly wiersz pracownika ktorego numer poda uzytkownik. Nastepnie wyswietl
+na konsoli imie, nazwisko, wynagrodzenie i datę zatrudnienia pracownika w formacie dd-mm-yyyy z wiersza.
+*. Wczytaj do zmiennej typu rekordowego zaokraglona srednia, minimum i maksimum zarobkow
+w departamencie ktorego numer zostanie podany przez uzytkownika. Wczytane dane wyswietl na konsoli
+
+KURSORY
+*. Korzystajac z kursora wyświetl na konsoli nazwiska, daty zatrudnienia w formacie dd-mm-yyyy
+ i nazwy departamentów wszystkich pracowników
+*. Korzystając z kursora wyświetl nazwy departamentów i liczbę pracowników w nich. Wynik powinien być posortowany
+malejąco po liczbie pracowników.
+**. Napisz program który odbierze od użytkownika  numer departamentu,
+ wyświetli na konsoli liczbę pracowników w tym departamencie, a poniżej wyświetli 
+listę imion i nazwisk osób z tego departamentu.
+**. Wczytaj do zmiennej pracownika którego numer zostanie podany przez uzytkownika. Wyświetl jego imię i nazwisko
+a następnie dodaj kolejną linię zawierającą "############". Poniżej wyświetl listę imion i nazwisk osób 
+którzy w kolumnie manager_id mają wartość odpowiadającą wartości employee_id wczytanego pracownika
+***. (pokazać kursor sparametryzowany)Wyświetl nazwy wszystkich departamentów a po każdej nazwie departamentu listę
+imion i nazwisk osób w nich zatrudnionych. Podpowiedź: powinny być dwa kursory z czego jeden sparametryzowany.
+
+WYJĄTKI
+*. Wyświetl wynik dzielenia 1 przez kolejne liczby z zakresu -10 do 10.
+**. Wyświetl wynik dzielenia 1 przez kolejne liczby w zakresue -10 do 10, tak by 
+w przypadku pojawienia się wyjatku nie przerywac dzialania pętli
+a jedynie wyswietlic przy jakiej wartosci i jaki wyjatek sie pojawil.
+**. Wczytaj do zmiennej i wyświetl dane kontaktowe osoby której numer zostanie podany przez użytkownika.
+Obsłuż wyjątek który pojawia się gdy podasz id nieistniejącego pracownika. Obsługa wyjątku powinna sprowadzać
+się do wyswietlenia stosownego komunikatu na konsoli.
+
+PROCEDURY
+*. Napisz procedurę która przyjmie  przez argumenty imię i nazwisko i wydrukuje na konsoli 
+powitanie typu "Witaj TwojeImie TwojeNazwisko".
+*. Napisz procedurę która przyjmie wzrost i masę a wyświetli na konsoli obiczone i zaokraglone
+do 2 miejsc po przecinku bmi. Obsłuż ewentualny wyjątek który może się pojawić gdy podasz wzrost zero.
+**.Napisz procedurę która wypisze imiona i nazwiska osób z dzialu ktorego numer zostanie
+	podany przy wywolaniu jako argument procedury.
+**.Napisz procedurę która przyjmie przez argumenty numer dzialu i podwyzkę. Procedura
+ma dac podwyżkę osobom z dzialu ktorego numer zostanie podany przy wywolaniu (podobnie jak podwyzka).
+Jeśli podwyżka nie zostanie zastosowana na żadnym wierszu, chcemy wywołać wyjątek z odpowiednim komunikatem.
+Zmiany wprowadzone przez tę procedurę maja byc utrwalone transakcyjnie.
+**.Napisz procedurę która przyjmie numer departamentu a wyświetli na konsoli 
+nazwę tego departamentu, srednia zarobkow w nim zaokraglona do 2 miejsc po 
+przecinku, ilosc pracownikow w nich. Wszystko w osobnych liniach ze stosownym opisem
+np. Nazwa departamentu=IT
+**. Napisz procedurę która będzie przyjmowała informację o zdarzeniu przez argument i zapisywała do 
+osobnej tabelki wiersz zawierajacy klucz glowny, timestamp zdarzenia, użytkownika wywołującego procedurę oraz
+informacje o zdarzeniu otrzymaną przez argument.
+log('jakas informacja')
+
+FUNKCJE
+*. napisz funkcję która odbierze przez argumenty wzrost i masę a zwróci obliczone bmi.
+*. Napisz funkcję która zwróci ilosc pracownikow w departamencie ktorego numer
+zostanie podany przez argument tej funkcji.
+**. Napisz funkcję która zwróci jeden wiersz pracownika którego numer zostanie podany 
+przez argument funkcji. Odbierz ten wiersz w bloku anonimowym i wyświetl z niego na konsoli imię, nazwisko i numer telefonu
+***. Napisz funkcję która przyjmie przez argument kwotę lokaty, ilosc miesiecy, oprocentowanie
+w skali roku. Funkcja ma zwrocic zarobek na lokacie o wskazanych parametrach. Kapitalizacja co miesiac
+
+
+PAKIETY
+**. Stwórz pakiet który będzie posiadal 2 funkcje. Jedna przyjmuje wzrost i mase a zwraca bmi,
+a druga przyjmuje bmi a zwraca opis dla bmi (niedowaga, nadwaga etc). Przetestuj dzialanie funkcji.
+**. Stwórz pakiet który będzie posiadał dwie przeciążone procedury o nazwie statystyka. Jedna z procedur
+ma nie przyjmować żadnego argumentu, druga ma przyjmować argument będący liczbą całkowitą. Pierwsza ma wydrukować
+na konsoli średnie, maksymalne i minimalne zarobki w całej firmie, druga te same dane ale dla działu którego
+numer zostanie podany przez argument tej procedury.
+**. Stwórz pakiet który będzie posiadał trzy prywatne funkcje - jedna zwracac 
+ma srednia zarobkow w firmie, druga ilosc pracownikow
+w firmie, trzecia sumę zarobków w firmie. Do pakietu dodaj
+też publiczną procedurę która korzystając z tych funkcji wypisze dane na konsoli
+**. Stwórz pakiet zawierający funkcję zwracającą wiersz pracownika którego numer zostanie podany przez jej argument. 
+Do pakietu dodaj też procedurę która przyjmie przez argument numer pracownika, wywoła w.w. funkcję a następnie 
+w osobnych liniach wyświetli imię, nazwisko, telefon i email odczytanego z funkcji pracownika
+
+
+
+TABLICE
+*. Stwórz tablicę 100 elementów tekstowych. Kazdy element ma zawierac ciag "element numer x" gdzie x będzie numerem 
+tego elementu. Nastepnie przeiteruj po tablicy i wyswietl po kolei zawartosc wszystkich jej elementów.
+*. Stwórz tablicę zawierajaca 10 kolejnych poteg liczby 2, następnie przeiteruj po tej tablicy i wyswietl jej elementy
+**. Korzystajac z kursora wczytaj dane wszystkich pracownikow do tablicy. Nastepnie przeiteruj 
+po tablicy i wyświetl imiona i nazwiska z jej elementów.
+Podpowiedzi:
+Można tak deklarować tablicę :
+type tablica is table of employees%rowtype index by binary_integer;
+a tak można w kodzie przypisywać:
+tab(x):=w
+***. Wczytaj do tablicy wynik zapytania z nazwami departamentow i liczbie pracownikow w nich.
+Następnie przeiteruj po tej liście i wyświetl zawartość elementów
+
+
+ZAAWANSOWANE PAKIETY,TABLICE,FUNKCJE,PROCEDURY PRZYPOMNIENIE
+*. Napisz funkcję która zwróci pod postacia tablicy tyle poteg liczby 2 ile podamy przez argument tej funkcji.
+**. Napisz funkcję która zwróci cala zawartosc tabeli departments w postaci tablicy
+**. Napisz procedurę która przyjmie przez argument tablicę elementów typu employees%rowtype i wyświetli nazwiska i imiona
+z wszystkich elementów. Przetestuj tę procedurę uruchamiajac ja i podajac jej taką tablicę z danymi.
+**. Stwórz funkcję która zwróci pod postacią zmiennej typu rekordowego sumę, średnią i maksymalne zarobki w calej firmie.
+Przetestuj jej dzialanie odbierajac dane i wyswietlajac je na konsoli
+***. Napisz pakiet który będzie zawierał funkcję zwracającą pod postacią tablicy listę departamentów i średnie zarobki w nich 
+zaokrąglone do 2 miejsc po przecinku. Do pakietu dodaj procedurę która będzie w stanie taką tablicę przyjąć a która ja
+ wydrukuje na konsoli. Napisz blok anonimowy który odbierze dane od funkcji z pakietu i przekaze do procedury z pakietu.
+***. Stwórz pakiet zawierający tablicę elementów typu employees%rowtype. Zadbaj o to by przy pierwszym odwolaniu 
+do pakietu do tej tablicy byly ladowane dane. Dodaj do pakietu procedure ktora wyswietli ile mamy elementów w tablicy.
+
+TRIGGERY
+**.(pokazać też deklarację zmiennych)
+ Napisz trigger który do osobnej tabelki będzie raportował zmiany na tabeli employees. Zapisywane w tej tabelce ma być:
+- klucz główny
+- nazwa tabeli
+- uzytkownik zmieniajacy
+- rodzaj operacji (update, insert, delete)
+- timestamp operacji
+**. Stwórz trigger który będzie w przypadku zmiany wynagrodzeń w employees odkladal w osobnej tabelce informacje
+o tym któremu pracownikowi, z jakiego wynagrodzenia, na jakie wynagrodzenie kiedy zmieniono wynagrodzenie i kto zmienial.
+**. Stwórz trigger który będzie automagicznie uzupełniał wartości klucza głównego tabeli regions za pomocą sekwencji przy wstawianiu
+wiersza do tej tabeli.
+**. Stwórz trigger który uniemożliwi zmiane wynagrodzenia w tabelce employees na mniejsze niż jest aktualnie.
+Trigger ma wyświetlać odpowiedni komunikat a w wierszu przywracać stare wynagrodzenie lub uniemożliwiać jego 
+zmianę.
+
+PLIKI TEKSTOWE
+*. Zapisz do pliku 100 kolejnych linii o treści "linia numer 1" zwiększając numerek przy każdej linii
+**. Zapisz do pliku w formacie CSV ( kolumny rozdzielone średnikami) listę imion, nazwisk i numerów telefonów z tabeli employees
+**. Stwórz procedurę która stworzy plik csv z listą imion i nazwisk osób z departamentu którego numer zostanie podany przez argument tej procedury.
+Nazwa pliku powinna być również podana przez argument procedury - do nazwy ma zostać doklejone '.csv'. Lista imion i nazwisk powinna być w pliku
+posortowana alfabetycznie po nazwiskach
+*** Napisz blok anonimowy który dla każdego departamentu w którym pracuje przynajmniej jedna osoba stworzy plik o takiej nazwie jak nazwa departamentu.
+W pliku powinna znajdowac sie lista imion, nazwisk i telefonów  osob z tego departamentu  w formacie CSV.
+
+	
+SQL DYNAMICZNY
+*. Napisz procedurę która przez argument dostanie wysokość podwyżki i warunki where jako ciąg tekstowy. Procedura ma dać 
+podwyżkę pracownikom spelniajacym warunki podane przez argument.
+*. Napisz funkcję która zwróci liczbe wierszy z tabeli employees spełniajacych warunki przekazane przez argument tej funkcji.
+**. Napisz procedurę która przyjmie przez argument warunki filtracji po tabelce employees. Procedura ma wczytywać do zmiennej typu 
+rekordowego a nastepnie wypisac na konsoli ilosc pracownikow, srednie zarobki i maksymalne zarobki dla osob spelniajacych warunki filtracji
+**. Napisz blok anonimowy który korzystajac z sql dynamicznego wczyta wiersz pracownika którego numer zostanie przekazany przez uzytkownika.
+Program ma na konsoli wyswietlic imie, nazwisko i numer telefonu odczytanego pracownika.
+**. Korzystajac z kursora dynamicznego pobierz i wyswietl na konsoli nazwiska i nazwy departamentów wszystkich pracowników.
+**. Napisz procedurę która będzie wyświetlała na konsoli listę numerów pracowników, imion i nazwisk osób spełniających 
+warunki podane przez argument procedury.
+***. Stwórz tabelę:
+create table raporty(
+id_raportu integer primary key,
+sql_raportu varchar2(4000)
+);
+Umieść w tej tabeli 2 raporty zwracajace do 5 kolumn. Stwórz procedurę która przez argumenty przyjmie nazwę pliku, numer raportu oraz rozdzielacz 
+(np. srednik). Procedura ma odczytac z tabelki raporty zapytanie na podstawie numeru raportu, wykonac to zapytanie a wynik zapytania umiescic w pliku csv
+o nazwie takiej jaka zostala podana przez argument procedury.
+
+OPERACJE MASOWE
+*. (preludium do operacji masowych) Wczytaj do tablicy całą zawartość tabeli duza wiersz po wierszu. Przed i po ładowaniu całości
+wyświetl aktualny czas 
+*. Zwielokrotnij zawartość tabelki duza tak by miala kilkanaście milionów wierszy. Spróbuj zaladowac cala 
+zawartosc tej tabelki do tablicy. Czy to się udało?
+
+**. Stwórz pakiet zawierający funkcję która załaduje do tablicy (i potem zwróci tą tablicę)
+ za pomocą operacji masowych wynik zapytania zwracajacego listę nazwisk i nazw departamentów z tabel duza i departments.
+Odbierz zwracane przez funkcję dane w bloku anonimowym i przeiteruj po zwracanej liście wyświetlając każdy element.
+
+***.Stwórz pakiet który będzie zawieral funkcję i procedurę. Funkcja ma przyjmowac przez argument
+warunki where i zwracac pod postacia tablicy wiersze z tabelki duza spelniajace przekazane warunki where.
+Do zaladowania danych do tablicy wykorzystaj operacje masowe. Procedura ma przyjmowac taka tablice
+jaka zwraca funkcja a nastepnie wypluwac do pliku ktorego nazwę również podamy przez argument 
+procedury imiona, nazwiska i telefony pracownikow. Stwórz blok anonimowy który odbierze 
+tablicę od funkcji i przekaze ja do procedury testujac dzialanie jednej i drugiej.
+
+AUTONOMICZNOŚĆ TRANSAKCYJNA
+**.Stwórz procedurę która do osobnej tabelki będzie rejestrowala zdarzenia.
+Procedura ma przyjac ciag tekstowy z opisem zdarzenia, a do tabelki wprowadzic 
+informacje o zdarzeniu, dacie zdarzenia i uzytkowniku ktory wywoluje procedurę.
+Tabelka powinna posiadać tez klucz glowny. Operacje w ramach procedury
+powinny byc autonomiczne transakcyjnie.
+
+KOMPILACJA NATYWNA
+***. Stwórz procedurę która przekompiluje wszystkie posiadane przez Ciebie 
+jednostki programowe do trybu natywnego. Słownik zawierający listing wszystkich jednostek
+programowych pl/sql: user_plsql_object_settings. Pomiń kompilację elementów typu 
+package body oraz procedury którą właśnie tworzysz.
+
+JOBY
+**.Stwórz taki system by co minutę wyrzucal do katalogu raporty plik csv o nazwie zawierajacej datę, godzinę i minutę.
+Plik ma zawierać w formacie csv nazwy departamentów i sumę zarobków w nich.
+
+PARAMETRY OUT I IN OUT
+*. Stwórz procedurę która przez trzy parametry typu out zwróci srednie zarobki, sumę zarobków i nazwę departamentu
+którego numer zostanie podany przez czwarty argument. Przetestuj działanie procedury.
+*. Stwórz procedurę która przyjmie wartość zmiennoprzecinkową przez parametr typu in out i tym samym parametrem
+zwróci tę wartość ale zaokrągloną do 2 miejsc po przecinku. Przetestuj działanie procedury.
+
+AUTHID - UPRAWNIENIA
+**. Stwórz funkcję która będzie zwracała ilość sesji użytkownika którego nazwę podamy przez argument tej funkcji.
+Funkcja ma pozwalać na sprawdzenie ilości sesji tylko jeśli użytkownik ma uprawnienia do v$session.
+
+WRAPOWANIE
+**. Wybierz jeden z tworzonych przez nas na szkoleniu pakietów i zawrapuj go. Sprawdź czy da się odczytać kod.
+
+CZYTANIE PLIKÓW ZA POMOCA UTL_FILE
+**.  Przetwórz plik logu z archiwum: http://jsystems.pl/temp/accesslog.zip
+Odczytaj jego zawartosc i przetwórz w taki sposób żeby do tabeli tymczasowej 
+wprowadzic wszystkie adresy ip wystepujace w tym pliku - z jakims kluczem glownym.
+Dodaj funkcję która zwróci ilość unikalnych sesji z tej tabeli tymczasowej.
+
+EXTERNAL TABLE 
+**. (wymagana znajomosc widokow zmaterializowanych i jobow) Pobierz i umiesc u siebie plik http://jsystems.pl/temp/accesslog.csv
+Zaloz external table na tym pliku tak by mozna bylo robic na nim selecty.
+Stwórz widok zmaterializowany wyświetlajacy adres url i ilosc wejsc na dany adres url posortowane malejaco po ilosci wejsc.
+Zadbaj o to by ten widok zmaterializowany odswiezal sie automagicznie codziennie o godzinie 18. 
+
+
+FUNKCJE STRUMIENIOWE
+**.
+Stwórz funkcję strumieniowa ktora bedzie zwracac w 3 kolumnach :
+1. kolejny numer potęgi
+2. wartość potęgi dla liczby 2 dla tej potęgi
+3. wartość potęgi dla liczby 3 dla tej potęgi
+Funkcja ta ma przez argument przyjmować maksymalna liczbe elementów jaka ma zostać zwrócona.

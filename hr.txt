@@ -860,3 +860,48 @@ Napisz program ktory bedzie dodawal wiersze do tabeli regions. Nazwa regionu ma 
 uzytkownika (przez zmienn¹). Numer regionu ma zostac podany z sekwencji a nastepnie po zapisie wiersza wyswietlony na konsoli.
 (Chcemy uzyskac region_id pod jakim wyladowal nowo dodany region)
 */
+
+create sequence reg_seq start with 5;
+
+insert into regions values (reg_seq.nextval,'Sosnowiec');
+
+CREATE SEQUENCE regio start with 5 ;
+/
+
+select * from user_sequences;
+
+
+
+delete from regions where region_id=5;
+
+create sequence rseq start with 5;
+
+declare
+nazwa varchar2(4000):='Sosnowiec';
+id integer;
+begin
+insert into regions(region_id,region_name) values (rseq.nextval, nazwa) returning region_id into id;
+dbms_output.put_line('Region '||nazwa||' jest pod id='||id);
+end;
+
+insert into regions values (5,'xxx');
+insert into regions(region_id,region_name) values (5,'xxxx');
+
+/
+declare
+nazwa varchar2(4000):='&nazwa_regionu';
+id integer;
+begin
+insert into regions(region_id,region_name) values (rseq.nextval, nazwa) returning region_id into id;
+dbms_output.put_line('Region '||nazwa||' jest pod id='||id);
+end;
+/
+
+declare
+najwyzszy integer:=4;
+begin
+delete from regions where region_id>najwyzszy;
+end;
+/
+
+select * from regions;
