@@ -1,1 +1,46 @@
 select * from employees;
+--przerwa do 10:43
+--blok anonimowy
+--procedura
+--funkcja
+--trigger / wyzwalacz
+--pakiet 
+/
+begin
+null;
+end;
+/
+begin
+dbms_output.put_line('hello world!');
+end;
+/
+set serveroutput on;
+/
+
+declare
+owoc varchar2(4000);
+x integer;
+y number;
+z date;
+begin
+dbms_output.put_line('hello world!');
+end;
+/
+
+
+declare
+owoc varchar2(4000):='banan';
+x integer:=200;
+y number;
+z date;
+begin
+x:=100;
+dbms_output.put_line('hello world! owoc='||owoc||' x='||x);
+end;
+/
+
+/*1.
+Stwórz blok anonimowy który przyjmie poprzez zmienne twoje imie oraz nazwisko, 
+a nastepnie wyswietli komunikat typu witaj twoje_imie twoje_nazwisko!
+*/
+
