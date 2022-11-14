@@ -454,4 +454,24 @@ end;
 */
 
 select mod(11,2) from dual;
+/
 
+begin
+for x in 1..100 loop
+    if mod(x,2)=0 then 
+        dbms_output.put_line(x||' jest parzysta');
+    else
+        dbms_output.put_line(x||' jest nieparzysta');
+    end if;
+end loop;
+end;
+/
+
+--przerwa obiadowa do 13:24
+
+/*
+8. Napisz symulator lokaty. Symulator ma przez zmienne przyjac kwote lokowana, ilosc miesiecy 
+na ktora zakladamy lokatê i oprocentowanie w skali roku. Zakladamy comiesieczna kapitalizacje 
+odsetek. Dla kazdego miesiaca trwania lokaty wyswietl ktory to miesiac i ile mamy odlozone na 
+lokacie. 
+*/
