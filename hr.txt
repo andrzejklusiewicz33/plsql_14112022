@@ -580,3 +580,59 @@ end;
 /*9.
 Korzystajac z petli while lub exit when wyswietlaj kolejne potegi liczby dwa az potega nie wyniesie wiecej niz 10000
 */
+
+
+declare
+wynik number:=0;
+np integer:=0;
+begin
+while(wynik<10000) loop
+    np:=np+1;
+    wynik:=power(2,np);
+    dbms_output.put_line(np||' '||wynik);
+end loop;
+end;
+/
+
+
+declare
+wynik number:=0;
+np integer:=0;
+begin
+while(wynik<10000) loop
+    dbms_output.put_line(np||' '||wynik);
+    np:=np+1;
+    wynik:=power(2,np);    
+end loop;
+end;
+/
+
+declare
+wynik number:=0;
+np integer:=0;
+begin
+loop
+np:=np+1;
+wynik:=power(2,np);
+exit when wynik>10000;
+dbms_output.put_line(wynik);
+end loop;
+end;
+/
+
+
+/*10.
+Napisz program który bêdzie dodawa³ kolejne wartoœci losowe do sumy (wypisuj¹c ile doda³ i ile wynosi suma)
+tak d³ugo a¿ suma nie przekroczy wartoœci podanej przez u¿ytkownika (przez zmienna). Wartoœæ losowa:
+execute dbms_output.put_line(round(dbms_random.value(1,1000)));
+*/
+
+
+execute dbms_output.put_line(round(dbms_random.value(1,1000)));
+/
+declare
+wylosowane number;
+begin
+wylosowane:=round(dbms_random.value(1,1000));
+dbms_output.put_line(wylosowane);
+end;
