@@ -475,3 +475,108 @@ na ktora zakladamy lokatê i oprocentowanie w skali roku. Zakladamy comiesieczna 
 odsetek. Dla kazdego miesiaca trwania lokaty wyswietl ktory to miesiac i ile mamy odlozone na 
 lokacie. 
 */
+
+declare
+konto number:=100000;
+ilosc_miesiecy integer:=24;
+oprocentowanie number:=0.08;
+begin
+    for m in 1..ilosc_miesiecy loop
+        konto:=round(konto+(konto*oprocentowanie/12),2);
+        dbms_output.put_line(m||' '||konto);
+    end loop;
+end;
+/
+
+
+declare
+konto number:=100000;
+ilosc_miesiecy integer:=24;
+oprocentowanie number:=-0.18;
+begin
+    for m in 1..ilosc_miesiecy loop
+        konto:=round(konto+(konto*oprocentowanie/12),2);
+        dbms_output.put_line(m||' '||konto);
+    end loop;
+end;
+/
+
+begin
+for x in -10..10 loop
+    if x=0 then
+        continue;
+    end if;
+    dbms_output.put_line(x||' '||1/x);
+end loop;
+end;
+/
+
+begin
+for x in -10..10 loop
+    if x=0 then
+        exit;
+    end if;
+    dbms_output.put_line(x||' '||1/x);
+end loop;
+end;
+/
+
+
+begin
+while(1=1) loop
+    null;
+end loop;
+end;
+/
+
+
+declare
+suma integer:=1;
+x integer:=1;
+begin
+while(suma<100) loop
+    x:=x+1;
+    suma:=suma+x;
+    dbms_output.put_line('x='||x||' suma='||suma);
+end loop;
+end;
+/
+
+
+declare 
+cursor k is select * from employees;
+begin
+for w in k loop
+    dbms_output.put_line(w.last_name);
+end loop;
+end;
+/
+
+declare
+x integer:=0;
+begin
+loop
+x:=x+1;
+dbms_output.put_line(x);
+exit when x=10;
+end loop;
+end;
+
+/
+
+
+declare
+x integer:=0;
+begin
+loop
+x:=x+1;
+dbms_output.put_line(x);
+if x=10 then exit;
+end if;
+end loop;
+end;
+/
+
+/*9.
+Korzystajac z petli while lub exit when wyswietlaj kolejne potegi liczby dwa az potega nie wyniesie wiecej niz 10000
+*/
