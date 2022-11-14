@@ -307,3 +307,74 @@ dbms_output.put_line('Twoje BMI='||bmi||' (grubasie!)');
 end;
 /
 --https://pl.wikipedia.org/wiki/Wska%C5%BAnik_masy_cia%C5%82a
+
+
+declare
+wzrost number:=1.76;
+masa number:=72;
+bmi number;
+begin
+bmi:=round(masa/power(wzrost,2),2);
+dbms_output.put_line('Twoje BMI='||bmi||' (grubasie!)');
+if bmi<16 then
+    dbms_output.put_line('wyglodzenie');
+elsif bmi>=16 and bmi<17 then ---fuuuuuu
+    dbms_output.put_line('wychudzenie');
+end if;
+end;
+/
+
+
+
+declare
+wzrost number:=1.76;
+masa number:=93;
+bmi number;
+begin
+bmi:=round(masa/power(wzrost,2),2);
+dbms_output.put_line('Twoje BMI='||bmi||' (grubasie!)');
+if bmi<16 then
+    dbms_output.put_line('wyglodzenie');
+elsif bmi<17 then 
+    dbms_output.put_line('wychudzenie');
+elsif bmi<18.5 then 
+    dbms_output.put_line('niedowaga');
+elsif bmi<25 then 
+    dbms_output.put_line('masa ok');
+elsif bmi<30 then
+    dbms_output.put_line('nadwaga');
+elsif bmi<35 then
+    dbms_output.put_line('I stopieñ przypakowania');
+elsif bmi<40 then 
+    dbms_output.put_line('II stopieñ przypakowania');
+else 
+    dbms_output.put_line('III stopieñ przypakowania');
+end if;
+end;
+/
+
+
+begin
+    for x in 1..10 loop
+    dbms_output.put_line('siema');
+    end loop;
+    dbms_output.put_line('koniec');
+end;
+/
+
+
+
+
+begin
+    for x in 1..10 loop
+        dbms_output.put_line('siema po raz '||x);
+    end loop;
+    dbms_output.put_line('koniec');
+end;
+/
+
+/*Zadanie 6.
+*. Wyœwietl 20 kolejnych potêg liczby 2
+*/
+
+select power(10,3) from dual;
