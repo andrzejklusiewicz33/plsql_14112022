@@ -44,3 +44,83 @@ Stwórz blok anonimowy który przyjmie poprzez zmienne twoje imie oraz nazwisko,
 a nastepnie wyswietli komunikat typu witaj twoje_imie twoje_nazwisko!
 */
 
+--first_name
+--firstName
+
+
+declare
+first_name varchar2(4000):='Andrzej';
+last_name varchar2(4000):='Klusiewicz';
+begin
+dbms_output.put_line('Witaj '||first_name||' '||last_name||'!');
+end;
+/
+
+
+declare
+first_name varchar2(4000);
+last_name varchar2(4000);
+begin
+firsT_name:='Andrzej';
+last_name:='Klusiewicz';
+dbms_output.put_line('Witaj '||first_name||' '||last_name||'!');
+end;
+/
+
+declare
+x integer:=10;
+y integer:=3;
+begin
+dbms_output.put_line(x/y);
+end;
+/
+
+
+declare
+x integer:=10;
+y integer:=3;
+wynik number:=x/y;
+begin
+dbms_output.put_line(wynik);
+end;
+/
+
+
+declare
+x integer:=10;
+y integer:=3;
+wynik number;
+begin
+wynik:=round(x/y,2);
+dbms_output.put_line(wynik);
+end;
+/
+
+
+declare
+x integer:=10;
+y integer:=6;
+wynik number;
+begin
+wynik:=round(x/y,2);
+dbms_output.put_line(wynik);
+end;
+/
+
+
+declare
+x integer:=10;
+y integer:=6;
+wynik number;
+begin
+wynik:=trunc(x/y,2);
+dbms_output.put_line(wynik);
+end;
+/
+
+/*2.
+napisz program który przyjmie przez zmienne wzrost w metrach i masê w kilogramach a nastepnie 
+wyliczy i wypisze zaokraglone do 2 miejsc po przecinku bmi wg. wzoru masa/(wzrost*wzrost)
+*/
+
+select 72/power(1.76,2) from dual;
