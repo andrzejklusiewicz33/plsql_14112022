@@ -636,3 +636,136 @@ begin
 wylosowane:=round(dbms_random.value(1,1000));
 dbms_output.put_line(wylosowane);
 end;
+/
+
+declare
+suma number:=0;
+maksimum integer:=1000;
+begin
+while suma<=maksimum loop
+    suma:=suma+round(dbms_random.value(1,10));
+    dbms_output.put_line(suma);
+end loop;
+end;
+/
+
+declare
+suma number:=0;
+maksimum integer:=1000;
+begin
+loop
+    suma:=suma+round(dbms_random.value(1,10));
+    exit when suma>maksimum ;
+    dbms_output.put_line(suma);
+end loop;
+end;
+/
+declare
+suma number:=0;
+maksimum integer:=1000;
+begin
+while suma<=maksimum loop
+    dbms_output.put_line(suma);
+    suma:=suma+round(dbms_random.value(1,10));    
+end loop;
+end;
+/
+
+
+declare
+suma number:=0;
+maksimum integer:=1000;
+begin
+loop
+    suma:=suma+round(dbms_random.value(1,10));    
+    if suma>maksimum then exit;
+    end if;    
+    dbms_output.put_line(suma);
+end loop;
+end;
+/
+
+--przerwa do 14:44
+
+begin
+execute immediate 'create index ';
+end;
+/
+
+select * from employees;
+
+begin
+update employees set commission_pct=0.5 where department_id=90;
+end;
+/
+
+declare
+prowizja number:=0.5;
+departament integer:=90;
+begin
+update employees set commission_pct=prowizja where department_id=departament;
+end;
+/
+
+rollback;
+/
+
+declare
+prowizja number:=0.5;
+departament integer:=90;
+begin
+update employees set commission_pct=prowizja where department_id=departament;
+commit;
+end;
+/
+
+update employees set salary=1000 where department_id=1;
+
+/
+declare
+prowizja number:=0.5;
+departament integer:=90;
+begin
+update employees set commission_pct=prowizja where department_id=departament;
+dbms_output.put_line('zmiana dotyczyla '||sql%rowcount||' wierszy');
+commit;
+end;
+/
+
+declare
+prowizja number:=0.5;
+departament integer:=900;
+begin
+update employees set commission_pct=prowizja where department_id=departament;
+dbms_output.put_line('zmiana dotyczyla '||sql%rowcount||' wierszy');
+if sql%rowcount=0 then 
+    dbms_output.put_line('NIE ZMIENIONO ¯ADNEGO WIERSZA!');
+end if;
+commit;
+end;
+/
+
+
+
+declare
+prowizja number:=0.5;
+departament integer:=90;
+begin
+update employees set commission_pct=prowizja where department_id=departament;
+commit;
+dbms_output.put_line('zmiana dotyczyla '||sql%rowcount||' wierszy');
+end;
+/
+
+DECLARE
+WIERSZ EMPLOYEES%ROWCOUNT;
+BEGIN
+NULL;
+END;
+/
+
+/*11.
+Napisz program ktory bedzie dawal podwyzki. Kwota podwyzki oraz numer departamentu dla ktorego 
+zostanie zastosowana podwyzka maja zostac podane przez uzytkownika (POPRZEZ ZMIENNE).
+Operacja ma byæ zatwierdzona transakcyjnie a na konsoli chcemy jeszcze wyswietlic ilu wierszy dotyczyla zmiana.
+*/
