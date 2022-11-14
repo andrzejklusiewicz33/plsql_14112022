@@ -259,3 +259,51 @@ end;
 /*3.
 *. Napisz blok anonimowy który przyjmie przez zmienn¹ wartoœæ liczbow¹ i wypisze czy wartoœæ ta jest mniejsza, równa czy wiêksza ni¿ 0.
 */
+
+declare
+x integer:=-10;
+begin
+if x>0 then 
+    dbms_output.put_line('liczba dodatnia');
+elsif x=0 then 
+    dbms_output.put_line('zero!');
+elsif x<0 then 
+    dbms_output.put_line('liczba ujemna');
+end if;    
+end;
+/
+--if x>0{
+--    
+--}
+/
+
+declare
+x integer:=-10;
+begin
+if x>0 then 
+    dbms_output.put_line('liczba dodatnia');
+elsif x=0 then 
+    dbms_output.put_line('zero!');
+else  
+    dbms_output.put_line('liczba ujemna');
+end if;    
+end;
+/
+
+--przerwa do 12:00
+
+
+/*
+5. Napisz program który przyjmie od uzytkownika (przez zmienne) jego wzrost i masê, obliczy bmi i wyswietli stosowny opis wg. Wikipedii
+*/
+
+declare
+wzrost number:=1.76;
+masa number:=72;
+bmi number;
+begin
+bmi:=round(masa/power(wzrost,2),2);
+dbms_output.put_line('Twoje BMI='||bmi||' (grubasie!)');
+end;
+/
+--https://pl.wikipedia.org/wiki/Wska%C5%BAnik_masy_cia%C5%82a
