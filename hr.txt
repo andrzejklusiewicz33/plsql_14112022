@@ -758,9 +758,10 @@ end;
 /
 
 DECLARE
-WIERSZ EMPLOYEES%ROWCOUNT;
+WIERSZ EMPLOYEES%rowtype;
 BEGIN
-NULL;
+wiersz.last_name:='Klusiewicz';
+dbms_output.put_line(wiersz.last_name);
 END;
 /
 
@@ -769,3 +770,9 @@ Napisz program ktory bedzie dawal podwyzki. Kwota podwyzki oraz numer departamen
 zostanie zastosowana podwyzka maja zostac podane przez uzytkownika (POPRZEZ ZMIENNE).
 Operacja ma byæ zatwierdzona transakcyjnie a na konsoli chcemy jeszcze wyswietlic ilu wierszy dotyczyla zmiana.
 */
+
+
+desc employees;
+
+alter table employees enable row movement;
+flashback table employees to timestamp to_timestamp('14-11-2022 14:00:00','dd-mm-yyyy hh24:mi:ss');
