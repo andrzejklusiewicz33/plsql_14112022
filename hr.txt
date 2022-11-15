@@ -1484,3 +1484,61 @@ end;
 /*22.
 Wyœwietl wynik dzielenia 1 przez kolejne liczby z zakresu -10 do 10. 
 */
+
+begin
+for x in -10..10 loop
+    dbms_output.put_line(x||' '||1/x);
+end loop;
+end;
+
+/
+
+
+begin
+dbms_output.put_line(1/0);
+exception
+when others then dbms_output.put_line('wyj¹tek: '||sqlerrm||' '||sqlcode);
+end;
+
+/
+
+
+begin
+dbms_output.put_line(1/0);
+exception
+when invalid_cursor then dbms_output.put_line('To siê nie ma prawa zdarzyc'); 
+when zero_divide then dbms_output.put_line('dzielenie przez zero!'); 
+when others then dbms_output.put_line('wyj¹tek: '||sqlerrm||' '||sqlcode);
+end;
+
+/
+
+
+
+begin
+dbms_output.put_line(1/0);
+dbms_output.put_line('coœtam dalej');
+exception
+when invalid_cursor then dbms_output.put_line('To siê nie ma prawa zdarzyc'); 
+when zero_divide then dbms_output.put_line('dzielenie przez zero!'); 
+when others then dbms_output.put_line('wyj¹tek: '||sqlerrm||' '||sqlcode);
+end;
+/
+
+
+begin
+    begin
+        dbms_output.put_line(1/0);
+    exception
+        when invalid_cursor then dbms_output.put_line('To siê nie ma prawa zdarzyc'); 
+        when zero_divide then dbms_output.put_line('dzielenie przez zero!'); 
+        when others then dbms_output.put_line('wyj¹tek: '||sqlerrm||' '||sqlcode);        
+    end;
+dbms_output.put_line('coœtam dalej');
+end;
+
+/*23.
+Wyœwietl wynik dzielenia 1 przez kolejne liczby w zakresue -10 do 10, tak by 
+w przypadku pojawienia siê wyjatku nie przerywac dzialania pêtli
+a jedynie wyswietlic przy jakiej wartosci i jaki wyjatek sie pojawil.
+*/
