@@ -1186,3 +1186,114 @@ desc employees;
 Wczytaj do zmiennej typu rekordowego zaokraglona srednia, minimum i maksimum zarobkow
 w departamencie ktorego numer zostanie podany przez uzytkownika. Wczytane dane wyswietl na konsoli
 */
+
+declare
+type rekordowy is record(
+srednia number,
+minimum number,
+maksimum number
+);
+rek rekordowy;
+begin
+select round(avg(salary)),min(salary),max(salary) into rek from employees where department_id=&numer_departamentu;
+dbms_output.put_line('srednia='||rek.srednia);
+dbms_output.put_line('minimum='||rek.minimum);
+dbms_output.put_line('maksimum='||rek.maksimum);
+end;
+/
+
+declare
+cursor k is select * from employees;
+begin
+for w in k loop
+    dbms_output.put_line(w.first_name||' '||w.last_name);
+end loop;
+end;
+/
+
+
+declare
+cursor k is select first_name,last_name from employees;
+begin
+for w in k loop
+    dbms_output.put_line(w.first_name||' '||w.last_name);
+end loop;
+end;
+/
+
+select * from employees;
+drop index emp_name_ix;
+select firsT_name,last_name from employees;
+create index omg_wtf on employees(last_name,first_name);
+
+select * from employees where department_id=90;
+
+create index abc on employees(department_id);
+
+select department_id,rowid from employees order by 1;
+select * from employees where rowid in  ('AAAR6YAAEAAALBeAAE','AAAR6YAAEAAALBeAAD');
+/
+
+
+
+declare
+cursor k is 
+select first_name,last_name,job_title from employees join jobs using(job_id);
+begin
+for w in k loop
+    dbms_output.put_line(w.first_name||' '||w.last_name||' '||w.job_title);
+end loop;
+end;
+/
+
+
+begin
+ for w in (select last_name from employees) loop
+    dbms_output.put_line(w.last_name);
+ end loop;
+end;
+/
+
+
+declare
+cursor k is 
+select first_name,last_name,job_title from employees join jobs using(job_id);
+begin
+for w in k loop
+    dbms_output.put_line(w.first_name||' '||w.last_name||' '||w.job_title);
+end loop;
+end;
+/
+
+declare
+cursor k is 
+select first_name,last_name,job_title from employees join jobs using(job_id);
+w k%rowtype;
+begin
+open k;
+loop
+    fetch k into w;
+    exit when k%notfound;
+    dbms_output.put_line(w.first_name||' '||w.last_name||' '||w.job_title);
+end loop;    
+close k;
+end;
+/
+
+declare
+cursor k is select * from employees;
+type tablica is table of k%rowtype index by binary_integer;
+tab tablica;
+begin
+open k;
+fetch k bulk collect into tab;
+close k;
+dbms_output.put_line(tab.count);
+end;
+/
+
+
+/*18.
+Korzystajac z kursora wyœwietl na konsoli nazwiska, daty zatrudnienia w formacie dd-mm-yyyy
+ i nazwy departamentów wszystkich pracowników
+*/
