@@ -1357,8 +1357,78 @@ end loop;
 end;
 /
 
+
+select count(*) from employees where department_id=90;
+select last_name,first_name from employees where department_id=90;
+create index rotfl on employees(department_id,last_name,first_name);
+
+/
+declare
+cursor k is select last_name,first_name from employees where department_id=90;
+w k%rowtype;
+begin
+open k;
+fetch k into w;
+dbms_output.put_line(w.first_name);
+fetch k into w;
+dbms_output.put_line(w.first_name);
+close k;
+end;
+/
+
+
+
 /*20.
  Napisz program który odbierze od u¿ytkownika  numer departamentu,
  wyœwietli na konsoli liczbê pracowników w tym departamencie, a poni¿ej wyœwietli 
 listê imion i nazwisk osób z tego departamentu.
+*/
+
+declare
+ilosc integer;
+nd integer:=&numer_departamentu;
+cursor k is
+select last_name,first_name from employees where department_id=nd;
+begin
+select count(*) into ilosc from employees where department_id=nd;
+dbms_output.put_line('iloœæ pracowników w departamencie '||nd||' wynosi '||ilosc);
+for w in k loop
+    dbms_output.put_line(w.first_name||' '||w.last_name);
+end loop;
+end;
+/
+
+
+declare
+nd integer:=90;
+cursor k is select * from employees where department_id=nd;
+begin
+for w in k loop
+    dbms_output.put_line(w.last_name);
+end loop;
+end;
+/
+
+
+declare
+cursor k(nd integer) is select * from employees where department_id=nd;
+begin
+for w in k(90) loop
+    dbms_output.put_line(w.last_name);
+end loop;
+end;
+/
+
+begin
+    for y in 1..10 loop
+        for x in 1..10 loop
+            dbms_output.put_line('y='||y||' x='||x);
+        end loop;
+    end loop;
+end;
+/
+
+/*21.
+Wyœwietl nazwy wszystkich departamentów a po ka¿dej nazwie departamentu listê
+imion i nazwisk osób w nich zatrudnionych. PodpowiedŸ: powinny byæ dwa kursory z czego jeden sparametryzowany.
 */
