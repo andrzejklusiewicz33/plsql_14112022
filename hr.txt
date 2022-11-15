@@ -1688,3 +1688,43 @@ COS NUMBER:=1.7;
 begin
 da_fuq(COS);
 end;
+/
+
+create or replace procedure bmi_proc(wzrost number,masa number) is 
+bmi number;
+begin
+    bmi:=round(masa/power(wzrost,2),2);
+    dbms_output.put_line('bmi='||bmi);
+end;
+
+declare
+w number:=1.76;
+m number:=72;
+begin
+bmi_proc(w,m);
+end;
+/
+
+
+create or replace procedure bmi_proc(wzrost number,masa number) is 
+bmi number;
+begin
+    bmi:=round(masa/power(wzrost,2),2);
+    dbms_output.put_line('bmi='||bmi);
+exception
+when zero_divide then dbms_output.put_line('poda³eœ zerowy wzrost');
+end;
+/
+--
+declare
+w number:=0;
+m number:=72;
+begin
+bmi_proc(w,m);
+end;
+/
+
+/*27.
+Napisz procedurê która wypisze imiona i nazwiska osób z dzialu ktorego numer zostanie
+podany przy wywolaniu jako argument procedury.
+*/
