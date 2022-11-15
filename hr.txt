@@ -1728,3 +1728,79 @@ end;
 Napisz procedurê która wypisze imiona i nazwiska osób z dzialu ktorego numer zostanie
 podany przy wywolaniu jako argument procedury.
 */
+
+
+create or replace procedure lista_osob(nd integer) is 
+cursor k is select first_name,last_name from employees where department_id=nd;
+begin
+for w in k loop
+    dbms_output.put_line(w.first_name||' '||w.last_name);
+end loop;
+end;
+/
+
+execute lista_osob(90);
+/
+
+create or replace procedure lista_osob(nd integer) is 
+cursor k is select first_name,last_name from employees where department_id=nd;
+ilosc integer;
+begin
+select count(*) into ilosc from employees where department_id=nd;
+if ilosc=0 then 
+    raise_application_error(-20001,'nie ma osób w tym dziale');
+end if;
+for w in k loop
+    dbms_output.put_line(w.first_name||' '||w.last_name);
+end loop;
+end;
+/
+
+execute lista_osob(90);
+execute lista_osob(0);
+
+/
+
+create or replace procedure lista_osob(nd integer) is 
+cursor k is select first_name,last_name from employees where department_id=nd;
+ilosc integer;
+begin
+for w in k loop
+    dbms_output.put_line(k%rowcount||' '||w.first_name||' '||w.last_name);
+end loop;
+end;
+/
+
+
+create or replace procedure lista_osob(nd integer) is 
+cursor k is select first_name,last_name from employees where department_id=nd;
+ilosc integer:=0;
+begin
+for w in k loop
+    ilosc:=k%rowcount;
+    dbms_output.put_line(k%rowcount||' '||w.first_name||' '||w.last_name);
+end loop;
+if ilosc=0 then
+    dbms_output.put_line('nie ma osób w tym dziale');
+end if;
+end;
+/
+
+execute lista_osob(90);
+execute lista_osob(9);
+
+
+create or replace procedure lista_osob(nd integer) is 
+cursor k is select first_name,last_name from employees where department_id=nd;
+ilosc integer:=0;
+ok integer:=0;
+begin
+for w in k loop
+    ok:=1;
+    dbms_output.put_line(k%rowcount||' '||w.first_name||' '||w.last_name);
+end loop;
+if ilosc=0 then
+    dbms_output.put_line('nie ma osób w tym dziale');
+end if;
+end;
+/
