@@ -955,3 +955,26 @@ select avg(salary),count(*) from employees;
  Wczytaj do zmiennej a nastêpnie wyœwietl iloœæ osób w departamencie którego numer zostanie podany 
 przez uzytkownika
 */
+--
+--declare
+--x integer:=&something;
+--begin
+--null;
+--end;
+
+declare
+nr_departamentu integer:=&numer_departamentu;
+ilosc integer;
+begin
+select count(*) into ilosc from employees where department_id=nr_departamentu;
+dbms_output.put_line(ilosc);
+end;
+
+/
+
+
+/*14.
+Wczytaj do zmiennych i wyœwietl w osobnych liniach imiê, nazwisko i telefon osoby której numer pracownika poda u¿ytkownik.
+*/
+
+select * from employees;
