@@ -1434,11 +1434,14 @@ imion i nazwisk osób w nich zatrudnionych. PodpowiedŸ: powinny byæ dwa kursory z
 */
 
 declare
-cursor kursor_pracownicy(did integer) is select last_name,first_name from employees where department_id=;
+cursor kursor_departamenty is select department_id,department_name from departments
+where department_id in (select department_id from employees);
+cursor kursor_pracownicy(did integer) is select last_name,first_name from employees where department_id=did;
 begin
 for d in kursor_departamenty loop
+    dbms_output.put_line('###### '||d.department_name);
     for p in kursor_pracownicy(d.department_id) loop
-    
+        dbms_output.put_line(p.firsT_name||' '||p.last_Name);            
     end loop;
 end loop;
 end;
@@ -1447,3 +1450,37 @@ end;
 
 
 
+declare
+did integer;
+cursor kursor_departamenty is select department_id,department_name from departments
+where department_id in (select department_id from employees);
+cursor kursor_pracownicy is select last_name,first_name from employees where department_id=did;
+begin
+for d in kursor_departamenty loop
+    dbms_output.put_line('###### '||d.department_name);
+    did:=d.department_id;
+    for p in kursor_pracownicy loop
+        dbms_output.put_line(p.firsT_name||' '||p.last_Name);            
+    end loop;
+end loop;
+end;
+/
+
+declare
+cursor kursor_departamenty is select department_id,department_name from departments
+where department_id in (select department_id from employees);
+begin
+for d in kursor_departamenty loop
+    dbms_output.put_line('###### '||d.department_name);    
+    for p in (select last_name,first_name from employees where department_id=d.DEPARTMENT_ID) loop
+        dbms_output.put_line(p.firsT_name||' '||p.last_Name);            
+    end loop;
+end loop;
+end;
+/
+
+--PRZERWA OBIADOWA DO 13:36
+
+/*22.
+Wyœwietl wynik dzielenia 1 przez kolejne liczby z zakresu -10 do 10. 
+*/
