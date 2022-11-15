@@ -1542,3 +1542,30 @@ Wyœwietl wynik dzielenia 1 przez kolejne liczby w zakresue -10 do 10, tak by
 w przypadku pojawienia siê wyjatku nie przerywac dzialania pêtli
 a jedynie wyswietlic przy jakiej wartosci i jaki wyjatek sie pojawil.
 */
+/
+begin
+for x in -10..10 loop
+dbms_output.put_line(x||' '||1/x);
+end loop;
+exception ---fuuuuu, nie w tym miejscu!
+when zero_divide then dbms_output.put_line('nie dziel przez zero');
+end;
+/
+
+
+begin
+for x in -10..10 loop
+    begin
+        dbms_output.put_line(x||' '||1/x);
+    exception --- om nom nom
+        when zero_divide then dbms_output.put_line('nie dziel przez zero na '||x);
+    end;
+end loop;
+end;
+/
+
+/*24.
+Wczytaj do zmiennych i wyœwietl dane (imie,nazwisko,telefon,email) osoby której numer zostanie podany przez u¿ytkownika.
+Obs³u¿ wyj¹tek który pojawia siê gdy podasz id nieistniej¹cego pracownika. Obs³uga wyj¹tku powinna sprowadzaæ
+siê do wyswietlenia stosownego komunikatu na konsoli.
+*/
