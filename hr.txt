@@ -977,4 +977,71 @@ end;
 Wczytaj do zmiennych i wyœwietl w osobnych liniach imiê, nazwisko i telefon osoby której numer pracownika poda u¿ytkownik.
 */
 
+
+declare ---fuuuuuuu zle bo trzy odwolania do tabeli
+imie varchar2(4000);
+nazwisko varchar2(4000);
+telefon varchar2(4000);
+id integer:=&numer_pracownika;
+begin
+select first_name into imie from employees where employee_id=id;
+select last_name into nazwisko from employees where employee_id=id;
+select phone_number into telefon from employees where employee_id=id;
+dbms_output.put_line(imie);
+dbms_output.put_line(nazwisko);
+dbms_output.put_line(telefon);
+end;
+
+/
+
+
+declare
+imie varchar2(4000);
+nazwisko varchar2(4000);
+telefon varchar2(4000);
+id integer:=&numer_pracownika;
+begin
+select first_name,last_name,phone_number into imie,nazwisko,telefon from employees where employee_id=id;
+dbms_output.put_line(imie);
+dbms_output.put_line(nazwisko);
+dbms_output.put_line(telefon);
+end;
+
+
+/
 select * from employees;
+/
+declare
+wiersz employees%rowtype;
+begin
+select * into wiersz from employees where employee_id=1;
+exception
+when no_data_found then dbms_output.put_line('nie znaleziono wiersza o takim id');
+end;
+/
+
+declare
+wiersz employees%rowtype;
+begin
+select * into wiersz from employees where employee_id=1;
+exception
+when others then dbms_output.put_line(sqlerrm);
+end;
+/
+
+
+select * from employees where employee_id=100;
+select first_name from employees where employee_id=100;
+
+--blob,clob,nclob
+
+/
+
+/*15.
+Wczytaj do zmiennej i wyœwietl na konsoli ró¿nicê pomiêdzy najwy¿szymi i najni¿szymi zarobkami 
+w departamencie którego nazwê przekaze u¿ytkownik. Program ma byæ niewra¿liwy na wielkoœæ liter 
+w nazwie departamentu.
+*/
+
+select * from employees;
+select * from departments;
