@@ -1569,3 +1569,96 @@ Wczytaj do zmiennych i wyœwietl dane (imie,nazwisko,telefon,email) osoby której 
 Obs³u¿ wyj¹tek który pojawia siê gdy podasz id nieistniej¹cego pracownika. Obs³uga wyj¹tku powinna sprowadzaæ
 siê do wyswietlenia stosownego komunikatu na konsoli.
 */
+
+--https://jsystems.pl/temp/adminka.pdf
+--https://jsystems.pl/temp/tuning.pdf
+--https://blog.jsystems.pl/show_post/Bezp%C5%82atny_kurs_Python_od_podstaw/
+
+--no_data_found
+
+/
+declare
+wiersz employees%rowtype;
+np integer:=&numer_pracownika;
+begin
+select * into wiersz from employees where employee_Id=np;
+dbms_output.put_line(wiersz.first_name);
+dbms_output.put_line(wiersz.last_name);
+dbms_output.put_line(wiersz.phone_number);
+dbms_output.put_line(wiersz.email);
+exception 
+when NO_DATA_FOUND then dbms_output.put_line('nie ma pracownika o numerze '||np);
+end;
+/
+
+begin
+raise_application_error(-20001,'kij ci w oko!');
+end;
+/
+
+begin
+raise no_data_found;
+end;
+/
+
+declare
+wyjatek exception;
+pragma exception_init(wyjatek,-20001);
+begin
+raise_application_error(-20001,'kij ci w oko!');
+exception
+when wyjatek then dbms_output.put_line('abc...');
+end;
+/
+
+--przerwa do 14:50
+
+
+create or replace procedure odpal_mnie is 
+begin
+dbms_output.put_line('siema, to ja!');
+end;
+
+--Maciej Aniserowicz devstyle.pl - kurs git 
+
+
+execute odpal_mnie;
+
+begin
+odpal_mnie;
+end;
+/
+
+
+create or replace procedure odpal_mnie is 
+zmienna integer;
+x number;
+y date;
+begin
+dbms_output.put_line('siema, to ja!');
+end;
+/
+
+create or replace procedure jedz_owoc(nazwa varchar2) is 
+begin
+ dbms_output.put_line('om nom nom '||nazwa);
+end;
+/
+
+execute jedz_owoc('banan');
+
+/
+
+
+create or replace procedure jedz_owoc(nazwa varchar2) is 
+begin
+ dbms_output.put_line('om nom nom '||nazwa);
+end;
+/
+
+
+/*
+25.
+Napisz procedurê która przyjmie  przez argumenty imiê i nazwisko i wydrukuje na konsoli 
+powitanie typu "Witaj TwojeImie TwojeNazwisko".
+*/
