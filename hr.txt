@@ -1662,3 +1662,29 @@ end;
 Napisz procedurê która przyjmie  przez argumenty imiê i nazwisko i wydrukuje na konsoli 
 powitanie typu "Witaj TwojeImie TwojeNazwisko".
 */
+
+create or replace procedure witacz(imie varchar2,nazwisko varchar2) is
+begin
+    dbms_output.put_line('Witaj '||imie||' '||nazwisko||'!');
+end;
+/
+
+execute witacz('Andrzej','Klusiewicz');
+
+/*26.
+Napisz procedurê która przyjmie wzrost i masê a wyœwietli na konsoli obiczone i zaokraglone
+do 2 miejsc po przecinku bmi. Obs³u¿ ewentualny wyj¹tek który mo¿e siê pojawiæ gdy podasz wzrost zero.
+*/
+
+create or replace procedure da_fuq(x number) is
+begin
+null;
+end;
+/
+execute da_fuq(1.7);
+
+DECLARE 
+COS NUMBER:=1.7;
+begin
+da_fuq(COS);
+end;
