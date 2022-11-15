@@ -1297,3 +1297,50 @@ end;
 Korzystajac z kursora wyœwietl na konsoli nazwiska, daty zatrudnienia w formacie dd-mm-yyyy
  i nazwy departamentów wszystkich pracowników
 */
+
+select first_name,last_name,job_title,job_id from employees join jobs using(job_id);
+select first_name,last_name,job_title,e.job_id from employees e join jobs j on e.job_id=j.job_id;
+
+
+create table employees2 as select * from employees;
+create table jobs2 as select * from jobs;
+
+select first_name,last_name,job_title from employees2 join jobs2 using(job_id);
+create index pierwszy on employees2(job_id,first_name,last_name);
+create index drugi on jobs2(job_id,job_title);
+
+
+select * from wielka;
+select count(*) from wielka;
+update wielka set salary=salary+1;
+
+/
+declare
+cursor k is 
+select last_Name,to_char(hire_date,'dd-mm-yyyy') data_zatr,department_name  from employees join departments using(department_id);
+begin
+for w in k loop
+    dbms_output.put_line(w.last_name||' '||w.data_zatr||' '||w.department_name);
+end loop;
+end;
+/
+
+
+declare
+cursor k is 
+select last_Name,hire_date,department_name  from employees join departments using(department_id);
+begin
+for w in k loop
+    dbms_output.put_line(w.last_name||' '||to_char(w.hire_date,'dd-mm-yyyy')||' '||w.department_name);
+end loop;
+end;
+/
+
+
+--przerwa do 11:58
+
+
+/*19.
+Korzystaj¹c z kursora wyœwietl nazwy departamentów i liczbê pracowników w nich. Wynik powinien byæ posortowany
+malej¹co po liczbie pracowników.
+*/
