@@ -1433,8 +1433,17 @@ Wyœwietl nazwy wszystkich departamentów a po ka¿dej nazwie departamentu listê
 imion i nazwisk osób w nich zatrudnionych. PodpowiedŸ: powinny byæ dwa kursory z czego jeden sparametryzowany.
 */
 
+declare
+cursor kursor_pracownicy(did integer) is select last_name,first_name from employees where department_id=;
+begin
 for d in kursor_departamenty loop
     for p in kursor_pracownicy(d.department_id) loop
     
     end loop;
 end loop;
+end;
+/
+
+
+
+
