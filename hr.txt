@@ -1045,3 +1045,89 @@ w nazwie departamentu.
 
 select * from employees;
 select * from departments;
+
+select * from departments where lower(department_name)=lower('MARKETING');
+
+SELECT MAX(SALARY)-MIN(SALARY) FROM EMPLOYEES JOIN DEPARTMENTS USING(DEPARTMENT_ID) WHERE lower(DEPARTMENT_NAME)=lower('It');
+
+select max(salary)-min(salary) from employees where department_id=(select department_id from departments where lower(department_name)=lower('it'));
+
+declare
+nazwa_departamentu varchar2(4000):='&nazwa_departamentu';
+roznica number;
+begin
+select max(salary)-min(salary) into roznica from employees where department_id=(select department_id from departments where lower(department_name)=lower(nazwa_departamentu));
+dbms_output.put_line('ró¿nica p³ac dla departamentu '||nazwa_departamentu||' wynosi '||roznica);
+end;
+/
+
+SELECT MAX(SALARY)-MIN(SALARY) FROM EMPLOYEES JOIN DEPARTMENTS USING(DEPARTMENT_ID) WHERE lower(DEPARTMENT_NAME)=lower('It');
+
+select max(salary)-min(salary) from employees where department_id=(select department_id from departments where lower(department_name)=lower('it'));
+/
+
+alter session set tracefile_identifier='to_ja_jestem_plikiem_ktorego_szukasz';
+alter session set sql_trace=true;
+
+create table wielka as select * From employees;
+
+begin
+for x in 1..14 loop
+ insert into wielka select * from wielka;
+ commit;
+end loop;
+end;
+
+declare
+cursor k is 
+select * from wielka order by last_name;
+begin
+for w in k loop
+null;
+end loop;
+end;
+/
+
+select 504069/17595097 from dual;
+
+--przerwa do 10:29
+/
+
+declare
+wiersz departments%rowtype;
+begin
+wiersz.department_name:='Coœtam';
+dbms_output.put_line(wiersz.department_name);
+end;
+/
+
+select * from departments;
+/
+
+declare
+wiersz departments%rowtype;
+begin
+select * into wiersz from departments where department_id=90;
+dbms_output.put_line(wiersz.department_name);
+end;
+/
+
+
+declare
+wiersz departments%rowtype;
+begin
+select * into wiersz from departments where department_id=90;
+dbms_output.put_line(upper(wiersz.department_name));
+end;
+/
+
+
+
+/*16.
+Wczytaj do zmiennej caly wiersz pracownika ktorego numer poda uzytkownik. Nastepnie wyswietl
+na konsoli imie, nazwisko, wynagrodzenie i datê zatrudnienia pracownika w formacie dd-mm-yyyy z wiersza.
+*/
+
+
+select * from employees;
+select to_char(sysdate,'dd-mm-yyyy') from dual;
