@@ -1130,4 +1130,59 @@ na konsoli imie, nazwisko, wynagrodzenie i datê zatrudnienia pracownika w formac
 
 
 select * from employees;
-select to_char(sysdate,'dd-mm-yyyy') from dual;
+select to_char(sysdate,'dd-mm-yyyy'),sysdate from dual;
+
+alter SESSION  set NLS_DATE_FORMAT = 'dd-mm-yyyy';
+/
+declare
+wiersz employees%rowtype;
+nr_pracownika integer:=&numer_pracownika;
+begin
+select * into wiersz from employees where employee_id=nr_pracownika;
+dbms_output.put_line(wiersz.first_name);
+dbms_output.put_line(wiersz.last_name);
+dbms_output.put_line(wiersz.salary);
+dbms_output.put_line(to_char(wiersz.hire_date,'dd-mm-yyyy'));
+end;
+
+/
+
+execute dbms_output.put_line('coœ'||chr(13)||'coœ jeszcze');
+/
+
+
+declare
+type rekordowy is record(
+ nazwisko varchar2(4000),
+ departament varchar2(4000)
+);
+rek rekordowy;
+begin
+select last_name,department_name into rek from employees join departments using(department_id) where employee_id=100;
+dbms_output.put_line(rek.nazwisko);
+dbms_output.put_line(rek.departament);
+end;
+/
+
+
+
+declare
+type rekordowy is record(
+ nazwisko employees.last_name%type,
+ departament varchar2(4000)
+);
+rek rekordowy;
+begin
+select last_name,department_name into rek from employees join departments using(department_id) where employee_id=100;
+dbms_output.put_line(rek.nazwisko);
+dbms_output.put_line(rek.departament);
+end;
+/
+
+desc employees;
+/
+
+/*17.
+Wczytaj do zmiennej typu rekordowego zaokraglona srednia, minimum i maksimum zarobkow
+w departamencie ktorego numer zostanie podany przez uzytkownika. Wczytane dane wyswietl na konsoli
+*/
