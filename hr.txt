@@ -1344,3 +1344,21 @@ end;
 Korzystaj¹c z kursora wyœwietl nazwy departamentów i liczbê pracowników w nich. Wynik powinien byæ posortowany
 malej¹co po liczbie pracowników.
 */
+
+
+declare
+cursor k is 
+select department_name, count(*) ilosc from employees join departments using(department_id) group by department_name 
+order by 2 desc;
+begin
+for w in k loop
+    dbms_output.put_line(w.department_name||' '||w.ilosc);
+end loop;
+end;
+/
+
+/*20.
+ Napisz program który odbierze od u¿ytkownika  numer departamentu,
+ wyœwietli na konsoli liczbê pracowników w tym departamencie, a poni¿ej wyœwietli 
+listê imion i nazwisk osób z tego departamentu.
+*/
