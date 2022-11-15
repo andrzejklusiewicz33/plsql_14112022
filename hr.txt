@@ -905,3 +905,53 @@ end;
 /
 
 select * from regions;
+
+/
+declare
+nazwisko varchar2(4000);
+begin
+select last_name into nazwisko from employees where employee_id=198;
+dbms_output.put_line(nazwisko);
+end;
+/
+declare
+nazwisko varchar2(4000);
+imie varchar2(4000);
+begin
+select last_name,first_name into nazwisko,imie from employees where employee_id=198;
+dbms_output.put_line(nazwisko);
+dbms_output.put_line(imie);
+end;
+/
+
+
+
+declare
+nazwisko varchar2(4000);
+imie varchar2(4000);
+begin
+select last_name,first_name into nazwisko,imie from employees; --fuuu
+dbms_output.put_line(nazwisko);
+dbms_output.put_line(imie);
+end;
+
+/
+
+declare
+srednia number;
+ilosc integer;
+begin
+select round(avg(salary)),count(*) into srednia,ilosc from employees;
+dbms_output.put_line(srednia);
+dbms_output.put_line(ilosc);
+dbms_output.put_line(srednia||' '||ilosc);
+end;
+/
+select avg(salary),count(*) from employees;
+/
+
+
+/*13.
+ Wczytaj do zmiennej a nastêpnie wyœwietl iloœæ osób w departamencie którego numer zostanie podany 
+przez uzytkownika
+*/
