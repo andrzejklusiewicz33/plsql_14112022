@@ -2311,3 +2311,117 @@ ma nie przyjmowaæ ¿adnego argumentu, druga ma przyjmowaæ argument bêd¹cy liczb¹ 
 na konsoli œrednie, maksymalne i minimalne zarobki w ca³ej firmie, druga te same dane ale dla dzia³u którego
 numer zostanie podany przez argument tej procedury.
 */
+/
+create or replace package cwiczenie36 is
+procedure statystyka;
+procedure statystyka(nr_dep integer);
+end;
+/
+
+create or replace package body cwiczenie36 is
+procedure statystyka is
+srednia number;
+maksi number;
+mini number;
+begin
+select avg(salary), max(salary),min(salary) into srednia,maksi,mini from employees;
+dbms_output.put_line('srednia='||srednia);
+dbms_output.put_line('minimalne='||mini);
+dbms_output.put_line('maksymalne='||maksi);
+end;
+
+procedure statystyka(nr_dep integer) is
+srednia number;
+maksi number;
+mini number;
+begin
+select avg(salary), max(salary),min(salary) into srednia,maksi,mini from employees where department_id=nr_dep;
+dbms_output.put_line('srednia='||srednia);
+dbms_output.put_line('minimalne='||mini);
+dbms_output.put_line('maksymalne='||maksi);
+end;
+
+end;
+
+/
+
+execute cwiczenie36.statystyka;
+execute cwiczenie36.statystyka(90);
+/
+
+create or replace package load_warehouse is
+procedure extract;
+procedure transform;
+procedure load;
+end;
+/
+
+create or replace package body load_warehouse is 
+procedure extract is 
+begin
+dbms_output.put_line('ekstrakcja danych');
+end;
+procedure transform is
+begin
+dbms_output.put_line('transformacja i oczyszczanie danych');
+end;
+procedure load is
+begin
+dbms_output.put_line('ladowanie danych');
+end;
+end;
+/
+
+begin
+load_warehouse.extract;
+--load_warehouse.transform;
+load_warehouse.load;
+end;
+/
+
+
+
+create or replace package load_warehouse is
+--procedure extract;
+--procedure transform;
+--procedure load;
+procedure run_this_stuff;
+end;
+/
+
+create or replace package body load_warehouse is 
+
+procedure extract is 
+begin
+dbms_output.put_line('ekstrakcja danych');
+end;
+procedure transform is
+begin
+dbms_output.put_line('transformacja i oczyszczanie danych');
+end;
+procedure load is
+begin
+dbms_output.put_line('ladowanie danych');
+end;
+
+procedure run_this_stuff is
+begin
+    extract;
+    transform;
+    load;
+end;
+
+end;
+/
+
+begin
+load_warehouse.run_this_stuff;
+end;
+/
+
+/*37.
+Stwórz pakiet który bêdzie posiada³ trzy prywatne funkcje - jedna zwracac 
+ma srednia zarobkow w firmie, druga ilosc pracownikow
+w firmie, trzecia sumê zarobków w firmie. Do pakietu dodaj
+te¿ publiczn¹ procedurê która korzystaj¹c z tych funkcji wypisze dane na konsoli
+*/
