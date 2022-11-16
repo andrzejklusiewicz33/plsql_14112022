@@ -2194,3 +2194,74 @@ Napisz funkcjê która zwróci jeden wiersz pracownika którego numer zostanie podan
 przez argument funkcji. Odbierz ten wiersz w bloku anonimowym i wyœwietl z niego na konsoli imiê, nazwisko i numer telefonu.
 Ogarnij tez sytuacje gdy ktos poda id nieistniejacego pracownika.
 */
+
+create or replace function pracownik(eid integer) return employees%rowtype is 
+wiersz employees%rowtype;
+begin
+select * into wiersz from employees where employee_id=eid;
+return wiersz;
+exception 
+when no_data_found then return wiersz;
+end;
+/
+declare
+wiersz employees%rowtype;
+begin
+wiersz:=pracownik(100);
+print('########################');
+print(wiersz.first_name);
+print(wiersz.last_name);
+print(wiersz.phone_number);
+print('########################');
+end;
+/
+
+
+--przerwa obiadowa do 14:00
+
+
+--a-->b-->c
+--
+--extract;
+--transform;
+--load;
+
+--odpal_ten_stuff;
+
+
+create or replace package pakiecik is 
+procedure witacz;
+procedure witacz(imie varchar2);
+function dajkoze return varchar2;
+end;
+/
+
+create or replace package body pakiecik is 
+procedure witacz is 
+begin
+    dbms_output.put_line('siema!');
+end;
+
+procedure witacz(imie varchar2) is 
+begin
+    dbms_output.put_line('Witaj '||imie||'!');
+end;
+
+
+function dajkoze return varchar2 is 
+begin
+return 'koza';
+end;
+end;
+/
+
+execute pakiecik.witacz;
+execute pakiecik.witacz('Andrzej');
+select pakiecik.dajkoze from dual;
+
+select round(10/3),round(10/3,2) from dual;
+
+/*35.
+Stwórz pakiet który bêdzie posiadal 2 funkcje. Jedna przyjmuje wzrost i mase a zwraca bmi,
+a druga przyjmuje bmi a zwraca opis dla bmi (niedowaga, nadwaga etc). Przetestuj dzialanie funkcji.
+*/
