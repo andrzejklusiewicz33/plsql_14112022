@@ -2252,6 +2252,7 @@ function dajkoze return varchar2 is
 begin
 return 'koza';
 end;
+
 end;
 /
 
@@ -2264,4 +2265,49 @@ select round(10/3),round(10/3,2) from dual;
 /*35.
 Stwórz pakiet który bêdzie posiadal 2 funkcje. Jedna przyjmuje wzrost i mase a zwraca bmi,
 a druga przyjmuje bmi a zwraca opis dla bmi (niedowaga, nadwaga etc). Przetestuj dzialanie funkcji.
+*/
+
+create or replace package cwiczenie35 is
+function bmi(w number,m number) return number;
+function opis_bmi(b number) return varchar2;
+end;
+/
+
+create or replace package body cwiczenie35 is 
+function bmi(w number,m number) return number is
+begin
+    return round(m/power(w,2),2);
+end;
+
+function opis_bmi(b number) return varchar2 is
+begin
+if b<16 then
+    return 'wyglodzenie';
+elsif b<17 then 
+    return 'wychudzenie';
+elsif b<18.5 then 
+    return 'niedowaga';
+elsif b<25 then 
+    return 'masa ok';
+elsif b<30 then
+    return 'nadwaga';
+elsif b<35 then
+    return 'I stopieñ przypakowania';
+elsif b<40 then 
+    return 'II stopieñ przypakowania';
+else 
+    return 'III stopieñ przypakowania';
+end if;
+end;
+end;
+/
+select cwiczenie35.opis_bmi( cwiczenie35.bmi(1.76,80)  ) from dual;
+select cwiczenie35.bmi(1.76,80) from dual;
+select cwiczenie35.opis_bmi(26) from dual;
+
+/*36.
+Stwórz pakiet który bêdzie posiada³ dwie przeci¹¿one procedury o nazwie statystyka. Jedna z procedur
+ma nie przyjmowaæ ¿adnego argumentu, druga ma przyjmowaæ argument bêd¹cy liczb¹ ca³kowit¹. Pierwsza ma wydrukowaæ
+na konsoli œrednie, maksymalne i minimalne zarobki w ca³ej firmie, druga te same dane ale dla dzia³u którego
+numer zostanie podany przez argument tej procedury.
 */
