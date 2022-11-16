@@ -1813,3 +1813,29 @@ ma dac podwy¿kê osobom z dzialu ktorego numer zostanie podany przy wywolaniu (po
 Jeœli podwy¿ka nie zostanie zastosowana na ¿adnym wierszu, chcemy wywo³aæ wyj¹tek z odpowiednim komunikatem.
 Zmiany wprowadzone przez tê procedurê maja byc utrwalone transakcyjnie.
 */
+
+update employees set salary=salary+1000 where department_id=1;
+
+execute podwyzka(90,1000);
+
+create or replace procedure podwyzka(nd integer,ile number) is
+begin
+update employees set salary=salary+ile where department_id=nd;
+if sql%rowcount=0 then
+    raise_application_error(-20001,'Nikt nie dosta³ podwy¿ki');
+end if;
+commit;
+end;
+
+execute podwyzka(0,1000);
+/
+
+
+/*
+29. Napisz procedurê która przyjmie numer departamentu a wyœwietli na konsoli 
+nazwê tego departamentu, srednia zarobkow w nim zaokraglona do 2 miejsc po 
+przecinku, ilosc pracownikow w nich. Wszystko w osobnych liniach ze stosownym opisem
+np. Nazwa departamentu=IT
+*/
+
+
