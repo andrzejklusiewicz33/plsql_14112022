@@ -2508,3 +2508,106 @@ uzytkownik_zmieniajacy varchar2(30) not null,
 rodzaj_operacji varchar2(40) not null,
 timestamp_operacji timestamp
 );
+
+create or replace trigger obserwator_zmian 
+after update or delete or insert on employees
+declare
+operacja zmiany.rodzaj_operacji%type;
+begin
+if inserting then operacja:='insert';
+elsif deleting then operacja:='delete';
+else operacja:='update';
+end if;
+insert into zmiany(id_zmiany,nazwa_tabeli,uzytkownik_zmieniajacy,rodzaj_operacji,timestamp_operacji)
+values (zmiany_seq.nextval,'employees',user,operacja,systimestamp);
+end;
+/
+
+update employees set salary=salary+1;
+
+
+select * from zmiany;
+
+/
+create or replace trigger zmiany_nazwisk 
+after update on employees 
+for each row
+begin
+dbms_output.put_line('zmiana wiersza');
+end;
+/
+
+
+update employees set salary=salary+1;
+
+/
+
+create or replace trigger zmiany_nazwisk 
+after update on employees 
+for each row
+begin
+dbms_output.put_line('stare nazwisko='||:old.last_name);
+dbms_output.put_line('nowe nazwisko='||:new.last_name);
+end;
+/
+
+update employees set last_name='Kowalski' where department_id=90;
+rollback;
+update employees set salary=salary+1;
+/
+
+
+create or replace trigger zmiany_nazwisk 
+after update on employees 
+for each row
+begin
+if :old.last_name<>:new.last_name then  ---fuuuuuuu
+    dbms_output.put_line('stare nazwisko='||:old.last_name);
+    dbms_output.put_line('nowe nazwisko='||:new.last_name);
+end if;
+end;
+/
+
+
+create or replace trigger zmiany_nazwisk 
+after update of last_name on employees 
+for each row
+begin
+    dbms_output.put_line('stare nazwisko='||:old.last_name);
+    dbms_output.put_line('nowe nazwisko='||:new.last_name);
+end;
+/
+
+
+update employees set last_name='Kowalski' where department_id=90;
+rollback;
+update employees set salary=salary+1;
+select * from employees;
+
+select * from user_triggers;
+
+create or replace trigger zmiany_nazwisk 
+after update on employees 
+for each row
+when(to_char(sysdate,'d') in (1,2,3))
+begin
+    dbms_output.put_line('stare nazwisko='||:old.last_name);
+    dbms_output.put_line('nowe nazwisko='||:new.last_name);
+end;
+/
+
+
+create or replace trigger zmiany_nazwisk 
+after update on employees 
+for each row
+when(new.last_name<>old.last_name)
+begin
+    dbms_output.put_line('stare nazwisko='||:old.last_name);
+    dbms_output.put_line('nowe nazwisko='||:new.last_name);
+end;
+/
+
+/*39.
+Stwórz trigger który bêdzie w przypadku zmiany wynagrodzeñ w employees odkladal w osobnej tabelce informacje
+o tym któremu pracownikowi, z jakiego wynagrodzenia, na jakie wynagrodzenie kiedy zmieniono wynagrodzenie i kto zmienial.
+*/
