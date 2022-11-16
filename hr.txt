@@ -2622,3 +2622,20 @@ zmieniajacy varchar2(30 ) not null
 );
 /
 create sequence zw_seq;
+/
+
+create or replace trigger zmiana_hajsu_trigger
+after update on employees 
+for each row
+when(old.salary<>new.salary)
+begin
+
+end;
+/
+
+create or replace trigger zmiana_hajsu_trigger
+after update of salary on employees 
+for each row
+begin
+
+end;
