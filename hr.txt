@@ -1803,4 +1803,13 @@ if ilosc=0 then
     dbms_output.put_line('nie ma osób w tym dziale');
 end if;
 end;
+
+
 /
+
+/*28.
+Napisz procedurê która przyjmie przez argumenty numer dzialu i podwyzkê. Procedura
+ma dac podwy¿kê osobom z dzialu ktorego numer zostanie podany przy wywolaniu (podobnie jak podwyzka).
+Jeœli podwy¿ka nie zostanie zastosowana na ¿adnym wierszu, chcemy wywo³aæ wyj¹tek z odpowiednim komunikatem.
+Zmiany wprowadzone przez tê procedurê maja byc utrwalone transakcyjnie.
+*/
