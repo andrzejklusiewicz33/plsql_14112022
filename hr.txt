@@ -2150,3 +2150,47 @@ select rok(to_date('16-11-2022','dd-mm-yyyy')) from dual;
 Napisz funkcjê która zwróci ilosc pracownikow w departamencie ktorego numer
 zostanie podany przez argument tej funkcji.
 */
+
+create or replace procedure print(x varchar2) is 
+begin
+dbms_output.put_line(x);
+end;
+/
+
+execute print('dupa');
+/
+
+create or replace function ile_pracownikow(did integer) return integer is 
+x integer;
+begin
+    select count(*) into x from employees where department_id=did;
+    return x;
+end;
+
+select ile_pracownikow(90) from dual;
+select ile_pracownikow(0) from dual;
+/
+
+
+
+create or replace function ile_pracownikow(did integer) return integer is 
+x integer;
+y integer;
+begin
+    select count(*) into y from departments where department_id=did;
+    if y=0 then
+        raise_application_error(-20001,'nie ma takiego dzia³u');
+    end if;
+    select count(*) into x from employees where department_id=did;
+    return x;
+end;
+/
+
+select ile_pracownikow(0) from dual;
+/
+
+/*34.
+Napisz funkcjê która zwróci jeden wiersz pracownika którego numer zostanie podany 
+przez argument funkcji. Odbierz ten wiersz w bloku anonimowym i wyœwietl z niego na konsoli imiê, nazwisko i numer telefonu.
+Ogarnij tez sytuacje gdy ktos poda id nieistniejacego pracownika.
+*/
