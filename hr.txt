@@ -2611,3 +2611,14 @@ end;
 Stwórz trigger który bêdzie w przypadku zmiany wynagrodzeñ w employees odkladal w osobnej tabelce informacje
 o tym któremu pracownikowi, z jakiego wynagrodzenia, na jakie wynagrodzenie kiedy zmieniono wynagrodzenie i kto zmienial.
 */
+
+create table zmiany_wynagrodzen(
+id_zw integer primary key,
+employee_Id integer references employees(employee_Id),
+stare_wynagrodzenie number not null,
+nowe_wynagrodzenie number not null,
+moment_zmiany timestamp not null,
+zmieniajacy varchar2(30 ) not null
+);
+/
+create sequence zw_seq;
