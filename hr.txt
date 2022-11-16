@@ -2090,3 +2090,46 @@ end;
 /*31.
 napisz funkcjê która odbierze przez argumenty wzrost i masê a zwróci obliczone bmi.
 */
+
+create or replace function funkcja return integer is 
+begin
+dbms_output.put_line('dupa!');
+return 1;
+end;
+/
+
+select funkcja from dual;
+
+execute dbms_output.put_line('ok');
+
+create or replace function bmi(w number,m number) return number is 
+begin
+    return round(m/power(w,2),2);
+end;
+
+select bmi(1.76,80) from dual;
+select bmi(0,80) from dual;
+
+/
+
+
+create or replace function bmi(w number,m number) return number is 
+begin
+    return round(m/power(w,2),2);
+exception 
+when zero_divide then dbms_output.put_line('wzrost jest równy zero');
+return -1;
+end;
+/
+select bmi(0,80) from dual;
+
+execute dbms_output.put_line('ok');
+
+
+/*32.
+napisz funkcjê która przyjmie datê a zwróci z niej tylko rok. Przetestuj jej dzialanie na kolumnie hire_date
+*/
+
+select to_char(sysdate,'yyyy') from dual;
+
+select last_name,hire_date,rok(hire_date) from employees;
