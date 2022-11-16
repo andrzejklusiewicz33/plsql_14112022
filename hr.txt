@@ -1913,3 +1913,180 @@ zalogowany:=user;
 end;
 
 execute log('nazwa_pakietu','nazwa_procedury/funkcji','operacja przebiegla pomyslnie');
+
+insert into tabela values (nazwa_sekwencji.nextval, );
+
+/
+--__name__
+
+create or replace procedure wow is 
+begin
+dbms_output.put_line($$PLSQL_UNIT);
+end;
+/
+execute wow;
+
+create or replace package omg is
+procedure wow;
+end;
+/
+create or replace package body omg is 
+procedure wow is 
+begin
+dbms_output.put_line($$PLSQL_UNIT);
+end;
+end;
+/
+execute omg.wow;
+
+execute loguj('pakiet_etl','oczyszczanie_danych','');
+
+
+/*30.
+Napisz procedurê która bêdzie przyjmowa³a nazwê pakietu, nazwê procedury lub funkcji, informacjê o zdarzeniu przez argument i zapisywa³a do 
+osobnej tabelki wiersz zawierajacy klucz glowny, timestamp zdarzenia, u¿ytkownika wywo³uj¹cego procedurê oraz
+informacje przekazane przez argumenty
+log('jakas informacja')
+*/
+
+create sequence log_seq;
+
+create table logs(
+log_id integer primary key,
+log_timestamp timestamp not null,
+logged_user varchar2(30) not null,
+package_name varchar2(4000) not null,
+function_name varchar2(4000) not null,
+info clob
+);
+
+create or replace procedure loguj(nazwa_pakietu varchar2,nazwa_procedury varchar2,info_about clob) is
+begin
+insert into logs(log_id,log_timestamp,logged_user,package_name,function_name,info) 
+values (log_seq.nextval,systimestamp,user,nazwa_pakietu,nazwa_procedury,info_about);
+end;
+/
+
+execute loguj('ETL','CLEAN_DATA','wszystko siê uda³o');
+select * from logs;
+
+a;
+loguj(.....)
+b;
+loguj(.....)
+c;
+loguj(.....)
+d;
+loguj(.....)
+/
+
+
+create or replace procedure loguj(nazwa_pakietu varchar2,nazwa_procedury varchar2,info_about clob) is
+pragma autonomous_transaction;
+begin
+insert into logs(log_id,log_timestamp,logged_user,package_name,function_name,info) 
+values (log_seq.nextval,systimestamp,user,nazwa_pakietu,nazwa_procedury,info_about);
+commit;
+end;
+/
+
+select * from employees;
+update employees set salary=1000;
+
+execute loguj('XI','JINGPING','wprowadzono komunizm');
+select * from logs;
+rollback;
+
+
+begin
+for x in 1..10 loop
+sys.dbms_session.sleep(1);
+--dbms_output.put_line('x='||x);
+loguj('XI','JINGPING','x='||x);
+end loop;
+end;
+/
+
+--przerwa do 12:03
+
+/
+
+select salary from employees;
+
+create or replace function brutto(netto number) return number is
+begin
+return round(netto*1.23,2);
+end;
+/
+
+create or replace function brutto(netto number) return number is
+wynik number;
+begin
+wynik:=round(netto*1.23,2);
+return wynik;
+null;
+end;
+/
+
+select salary,brutto(salary) from employees;
+
+
+
+/
+create or replace function wiele_returnow(x integer) return varchar2 is
+begin
+if x=1 then
+    return 'jeden';
+elsif x=2 then 
+    return 'dwa';
+else 
+    return 'poza zakresem';
+end if;
+end;
+/
+select wiele_returnow(1) from dual;
+select wiele_returnow(3) from dual;
+/
+
+select last_name,months_between(sysdate, hire_date) from employees;
+
+/
+
+create or replace function years_between(d1 date,d2 date) return number is 
+begin
+return months_between(d1,d2)/12;
+end;
+/
+
+select last_name,months_between(sysdate, hire_date),years_between(sysdate,hire_date) from employees;
+
+grant execute on brutto to hr;
+
+select hr.brutto(1) from dual;
+
+begin
+procedura;
+end;
+
+execute procedura;
+
+execute brutto(1); ---fuuu
+
+select brutto(1) from dual;
+/
+declare
+wynik number;
+begin
+wynik:=brutto(1);
+dbms_output.put_line(wynik);
+end;
+/
+
+begin
+dbms_output.put_line(brutto(1));
+end;
+/
+
+/*31.
+napisz funkcjê która odbierze przez argumenty wzrost i masê a zwróci obliczone bmi.
+*/
