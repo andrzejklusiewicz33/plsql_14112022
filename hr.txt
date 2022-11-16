@@ -1838,4 +1838,78 @@ przecinku, ilosc pracownikow w nich. Wszystko w osobnych liniach ze stosownym op
 np. Nazwa departamentu=IT
 */
 
+select department_name from departments where department_id=90;
+select avg(salary) from employees where department_id=90;
+select count(*) from employees where department_id=90;
 
+
+
+select department_name from departments where department_id=90;
+select count(*),avg(salary) from employees where department_id=90;
+
+select department_name,round(avg(salary),2), count(*) from employees join departments
+using(department_id)
+where department_id=90
+group by department_name;
+/
+create or replace procedure statystyki(did integer)is
+nazwa departments.department_name%type;
+srednia number;
+liczba integer;
+begin
+select department_name,round(avg(salary),2), count(*) 
+into nazwa,srednia,liczba
+from employees join departments
+using(department_id)
+where department_id=did
+group by department_name;
+dbms_output.put_line('nazwa departamentu='||nazwa);
+dbms_output.put_line('œrednia zarobków='||srednia);
+dbms_output.put_line('liczba pracowników='||liczba);
+exception 
+when no_data_found then dbms_output.put_line('nie ma takiego departamentu');
+end;
+/
+execute statystyki(90);
+execute statystyki(0);
+/
+
+
+begin
+for x in 1..10 loop
+sys.dbms_session.sleep(1);
+dbms_output.put_line('x='||x);
+end loop;
+end;
+/
+
+/
+
+--przerwa do 10:47
+
+/*30.
+Napisz procedurê która bêdzie przyjmowa³a nazwê pakietu, nazwê procedury lub funkcji, informacjê o zdarzeniu przez argument i zapisywa³a do 
+osobnej tabelki wiersz zawierajacy klucz glowny, timestamp zdarzenia, u¿ytkownika wywo³uj¹cego procedurê oraz
+informacje przekazane przez argumenty
+log('jakas informacja')
+*/
+
+create sequence log_seq;
+
+create table logs(
+log_id integer primary key,
+log_timestamp timestamp not null,
+logged_user varchar2(30) not null,
+package_name varchar2(4000) not null,
+function_name varchar2(4000) not null,
+info clob
+);
+
+select user from dual;
+select systimestamp from dual;
+
+begin
+zalogowany:=user;
+end;
+
+execute log('nazwa_pakietu','nazwa_procedury/funkcji','operacja przebiegla pomyslnie');
