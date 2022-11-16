@@ -2133,3 +2133,20 @@ napisz funkcjê która przyjmie datê a zwróci z niej tylko rok. Przetestuj jej dzi
 select to_char(sysdate,'yyyy') from dual;
 
 select last_name,hire_date,rok(hire_date) from employees;
+
+
+create or replace function rok(d date) return number is
+begin
+return to_char(d,'yyyy');
+end;
+/
+
+select last_name,hire_date,rok(hire_date) from employees;
+
+
+select rok(to_date('16-11-2022','dd-mm-yyyy')) from dual;
+
+/*33.
+Napisz funkcjê która zwróci ilosc pracownikow w departamencie ktorego numer
+zostanie podany przez argument tej funkcji.
+*/
