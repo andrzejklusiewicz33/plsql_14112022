@@ -2425,3 +2425,86 @@ ma srednia zarobkow w firmie, druga ilosc pracownikow
 w firmie, trzecia sumê zarobków w firmie. Do pakietu dodaj
 te¿ publiczn¹ procedurê która korzystaj¹c z tych funkcji wypisze dane na konsoli
 */
+
+
+create or replace package cwiczenie37 is
+--function srednia return number;
+--function ilosc return integer;
+--function suma return number;
+procedure wypisz;
+end;
+/
+create or replace package body cwiczenie37 is 
+function srednia return number is 
+x number;
+begin
+select avg(salary) into x from employees;
+return x;
+end;
+function ilosc return integer is 
+x integer;
+begin
+select count(*) into x from employees;
+return x; 
+end;
+function suma return number is 
+x number;
+begin
+select sum(salary) into x from employees;
+return x;
+end;
+
+procedure wypisz is 
+begin
+dbms_output.put_line('srednia='||srednia);
+dbms_output.put_line('ilosc='||ilosc);
+dbms_output.put_line('suma='||suma);
+end;
+end;
+/
+select cwiczenie37.srednia,cwiczenie37.ilosc,cwiczenie37.suma from dual;
+execute cwiczenie37.wypisz;
+
+grant execute on cwiczenie37 to hr;
+
+--przerwa do 15:50
+
+/
+create or replace trigger prosty 
+after update on employees
+begin
+dbms_output.put_line('update na employees!');
+end;
+/
+
+update employees set salary=salary+1;
+
+/
+create or replace trigger prosty 
+after update or delete or insert on employees
+begin
+if inserting then dbms_output.put_line('to by³ insert');
+elsif deleting then dbms_output.put_line('do byl delete');
+else dbms_output.put_line('to byl update');
+end if;
+end;
+/
+
+/*38.
+Napisz trigger który do osobnej tabelki bêdzie raportowa³ zmiany na tabeli employees. Zapisywane w tej tabelce ma byæ:
+- klucz g³ówny
+- nazwa tabeli
+- uzytkownik zmieniajacy
+- rodzaj operacji (update, insert, delete)
+- timestamp operacji
+*/
+
+create sequence zmiany_seq;
+
+create table zmiany(
+id_zmiany integer primary key,
+nazwa_tabeli varchar2(4000) not null,
+uzytkownik_zmieniajacy varchar2(30) not null,
+rodzaj_operacji varchar2(40) not null,
+timestamp_operacji timestamp
+);
