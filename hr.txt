@@ -2637,5 +2637,12 @@ create or replace trigger zmiana_hajsu_trigger
 after update of salary on employees 
 for each row
 begin
-
+    insert into zmiany_wynagrodzen(id_zw,employee_Id,stare_wynagrodzenie,nowe_wynagrodzenie,moment_zmiany,zmieniajacy)
+    values (zw_seq.nextval,:old.employee_Id,:old.salary,:new.salary,systimestamp,user);
 end;
+/
+
+update employees set salary=salary+133;
+select * from zmiany_wynagrodzen;
+
+--klusiewicz@jsystems.pl
