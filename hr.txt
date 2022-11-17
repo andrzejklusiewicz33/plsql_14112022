@@ -3472,3 +3472,9 @@ type tablica is table of k%rowtype index by binary_integer;
 function dane return tablica;
 end;
 /
+
+declare
+tab cwiczenie53.tablica;
+begin
+tab:=cwiczenie53.dane;
+end;
