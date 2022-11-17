@@ -3472,9 +3472,22 @@ type tablica is table of k%rowtype index by binary_integer;
 function dane return tablica;
 end;
 /
+create or replace package body cwiczenie53 is 
+function dane return tablica is 
+tab tablica;
+begin
+open k;
+fetch k bulk collect into tab;
+close k;
+return tab;
+end;
+end;
 
+/
 declare
 tab cwiczenie53.tablica;
 begin
 tab:=cwiczenie53.dane;
+dbms_output.put_line(tab.count);
 end;
+
