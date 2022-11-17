@@ -3162,3 +3162,98 @@ function daj_dane return tablica;
 
 procedure drukuj_dane(tab tablica);
 end;
+/
+
+create or replace package body cwiczenie50 is 
+function daj_dane return tablica is
+tab tablica;
+begin
+for w in k loop
+    tab(k%rowcount):=w;
+end loop;
+return tab;
+end;
+
+procedure drukuj_dane(tab tablica) is 
+begin
+for x in tab.first..tab.last loop
+    dbms_output.put_line(tab(x).department_name||' '||tab(x).srednia);
+end loop;
+end;
+end;
+/
+
+declare
+tab cwiczenie50.tablica;
+begin
+tab:=cwiczenie50.daj_dane;
+cwiczenie50.drukuj_dane(tab);
+end;
+/
+
+execute cwiczenie50.drukuj_dane( cwiczenie50.daj_dane );
+/
+
+
+
+create or replace package zmienne_i_inicjalizacja is 
+zmienna varchar2(4000);
+end;
+/
+
+begin
+zmienne_i_inicjalizacja.zmienna:='jakaœ ustawiona wartoœæ';
+end;
+/
+
+begin
+dbms_output.put_line(zmienne_i_inicjalizacja.zmienna);
+end;
+/
+
+
+create or replace package zmienne_i_inicjalizacja is 
+zmienna varchar2(4000);
+end;
+/
+create  or replace package body zmienne_i_inicjalizacja is 
+begin
+dbms_output.put_line('inicjalizacja......');
+zmienna:='ustawione w inicjalizacji';
+end;
+/
+
+
+begin
+dbms_output.put_line(zmienne_i_inicjalizacja.zmienna);
+end;
+/
+
+create or replace package inicjalizacja is
+type tablica is table of varchar2(4000) index by binary_integer;
+tab tablica;
+procedure ile;
+end;
+/
+
+create or replace package body inicjalizacja is 
+
+procedure ile is
+begin
+dbms_output.put_line('mamy '||tab.count||' elementow');
+end;
+
+begin
+for x in 1..10 loop
+    tab(x):='element numer '||x;
+end loop;
+end;
+/
+
+execute inicjalizacja.ile;
+/
+
+/*51.
+Stwórz pakiet zawieraj¹cy tablicê elementów typu employees%rowtype. Zadbaj o to by przy pierwszym odwolaniu 
+do pakietu do tej tablicy byly ladowane dane. Dodaj do pakietu procedure ktora wyswietli ile mamy elementów w tablicy.
+*/
