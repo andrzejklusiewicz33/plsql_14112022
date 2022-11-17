@@ -3124,5 +3124,30 @@ type rekordowy is record(
 end;
 /
 
-create or replace function oddaj_rekord return cwiczenie49.rekordowy is .....
+create or replace function oddaj_rekord return cwiczenie49.rekordowy is 
+rek cwiczenie49.rekordowy;
+begin
+--select sum(salary), avg(salary), max(salary) into rek.suma, rek.srednia,rek.maksymalne from employees;
+select sum(salary), avg(salary), max(salary) into rek from employees;
+return rek;
+end;
+/
 
+declare
+rek cwiczenie49.rekordowy;
+begin
+rek:=oddaj_rekord;
+dbms_output.put_line(rek.suma||' '||rek.srednia||' '||rek.maksymalne);
+end;
+/
+
+/*50.
+Napisz pakiet który bêdzie zawiera³ funkcjê zwracaj¹c¹ pod postaci¹ tablicy listê departamentów i œrednie zarobki w nich 
+zaokr¹glone do 2 miejsc po przecinku. Do pakietu dodaj procedurê która bêdzie w stanie tak¹ tablicê przyj¹æ a która ja
+ wydrukuje na konsoli. Napisz blok anonimowy który odbierze dane od funkcji z pakietu i przekaze do procedury z pakietu.
+*/
+
+select department_name,round(avg(salary),2) from employees 
+join departments using(department_id)
+group by department_name
+order by 2 desc;
