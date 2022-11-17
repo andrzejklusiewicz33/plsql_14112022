@@ -2710,6 +2710,100 @@ Stwórz trigger który uniemo¿liwi zmiane wynagrodzenia w tabelce employees na mni
 Trigger ma wyœwietlaæ odpowiedni komunikat a w wierszu przywracaæ stare wynagrodzenie lub uniemo¿liwiaæ jego 
 zmianê.
 */
+/
+create or replace trigger zmniejszanie_pensji
+before update on employees
+for each row
+when (new.salary<old.salary)
+begin
+raise_application_error(-20001,'sam se zmniejsz pensjê dziadu!');
+end;
+/
 
 
+update employees set salary=salary+100 where employee_id=100;
+update employees set salary=salary-100 where employee_id=100;
 
+select * from user_triggers;
+
+--przerwa do 10:21
+
+/
+declare
+type tablica is table of varchar2(400) index by binary_integer;
+tab tablica;
+begin
+tab(1):='nietoperz';
+tab(6):='kura';
+tab(-70):='indyk';
+dbms_output.put_line(tab.first);
+dbms_output.put_line(tab(tab.first));
+dbms_output.put_line(tab.last);
+dbms_output.put_line(tab(tab.last));
+dbms_output.put_line(tab.count);
+end;
+/
+
+declare
+type tablica is table of varchar2(4000) index by binary_integer;
+koza tablica;
+begin
+koza(1):='coœ 1';
+koza(2):='coœ 2';
+koza(3):='coœ 3';
+for x in 1..3 loop
+    dbms_output.put_line(koza(x));
+end loop;
+end;
+/
+
+
+declare
+type tablica is table of varchar2(4000) index by binary_integer;
+koza tablica;
+begin
+koza(1):='coœ 1';
+koza(2):='coœ 2';
+koza(3):='coœ 3';
+for x in koza.first..koza.last loop
+    dbms_output.put_line(koza(x));
+end loop;
+end;
+/
+
+
+declare
+cursor k is select last_name, first_name from employees;
+type tablica is table of k%rowtype index by binary_integer;
+tab tablica;
+begin
+    for w in k loop
+        tab(k%rowcount):=w;
+    end loop;
+    for x in tab.first..tab.last loop
+        dbms_output.put_line(tab(x).first_name||' '||tab(x).last_name);
+    end loop;
+end;
+/
+
+
+declare
+type tablica is table of varchar2(4000) index by binary_integer;
+koza tablica;
+tu_jestem integer;
+begin
+koza(1):='coœ 1';
+koza(20):='coœ 2';
+koza(300):='coœ 3';
+tu_jestem:=koza.first;
+for x in 1..koza.count loop
+    dbms_output.put_line(koza(tu_jestem));
+    tu_jestem:=koza.next(tu_jestem);
+end loop;
+end;
+
+
+/*42.
+Stwórz tablicê 100 elementów tekstowych. Kazdy element ma zawierac ciag "element numer x" gdzie x bêdzie numerem 
+tego elementu. Nastepnie przeiteruj po tablicy i wyswietl po kolei zawartosc wszystkich jej elementów.
+*/
