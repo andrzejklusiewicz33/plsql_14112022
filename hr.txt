@@ -2911,7 +2911,7 @@ end;
 
 create or replace package nadane is
 cursor k is select * from employees; 
-type tablica is table of employees%rowtype index by binary_integer;
+type tablica is table of k%rowtype index by binary_integer;
 tab tablica;
 end;
 /
@@ -3015,4 +3015,41 @@ end;
 
 /*47.
 Napisz funkcjê która zwróci cala zawartosc tabeli departments w postaci tablicy. Odbierz tablicê i wyswietl jej zawartosc
+*/
+
+create or replace package cwiczenie47 is
+type tablica is table of departments%rowtype index by binary_integer;
+end;
+/
+
+
+create or replace package cwiczenie47 is
+cursor k is select * from departments;
+type tablica is table of k%rowtype index by binary_integer;
+end;
+/
+
+create or replace function departamenty return cwiczenie47.tablica is 
+tab cwiczenie47.tablica;
+begin
+for w in cwiczenie47.k loop
+    tab(cwiczenie47.k%rowcount):=w;
+end loop;
+return tab;
+end;
+/
+
+declare
+tab cwiczenie47.tablica;
+begin
+tab:=departamenty;
+for x in tab.first..tab.last loop
+    dbms_output.put_line(tab(x).department_name);
+end loop;
+end;
+/
+
+/*48.
+Napisz procedurê która przyjmie przez argument tablicê elementów typu employees%rowtype i wyœwietli nazwiska i imiona
+z wszystkich elementów. Przetestuj tê procedurê uruchamiajac ja i podajac jej tak¹ tablicê z danymi.
 */
