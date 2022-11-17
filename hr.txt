@@ -3147,7 +3147,18 @@ zaokr¹glone do 2 miejsc po przecinku. Do pakietu dodaj procedurê która bêdzie w 
  wydrukuje na konsoli. Napisz blok anonimowy który odbierze dane od funkcji z pakietu i przekaze do procedury z pakietu.
 */
 
-select department_name,round(avg(salary),2) from employees 
+/
+
+create or replace package cwiczenie50 is 
+cursor k is
+select department_name,round(avg(salary),2) srednia from employees 
 join departments using(department_id)
 group by department_name
 order by 2 desc;
+
+type tablica is table of k%rowtype index by binary_integer;
+
+function daj_dane return tablica;
+
+procedure drukuj_dane(tab tablica);
+end;
