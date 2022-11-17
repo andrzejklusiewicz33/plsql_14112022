@@ -2669,3 +2669,47 @@ wiersza do tej tabeli.
 */
 
 select * from regions;
+insert into regions(region_name) values ('Radom');
+
+create sequence reg_seq start with 5;
+
+create table regions_andrzej as select * from regions;
+
+select * from user_triggers;
+select * from all_triggers;
+/
+create or replace trigger uzupelniacz 
+before insert on regions 
+for each row
+begin
+:new.region_id:=reg_seq.nextval;
+end;
+
+
+insert /*+append*/ into regions(region_name) values ('Radom');
+
+select /*+full(employees)*/last_name from employees;
+
+select * from regions;
+
+delete from regions where region_id not in (select region_id from countries);
+select * from regions as of timestamp to_timestamp('17.11.2022 09:34','dd.mm.yyyy hh24:mi');
+
+select * from employees;
+update employees set salary=1000;
+commit;
+select * from employees as of timestamp to_timestamp('17.11.2022 09:34','dd.mm.yyyy hh24:mi');
+flashback table employees to timestamp to_timestamp('17.11.2022 09:34','dd.mm.yyyy hh24:mi');
+
+update employees e set salary=
+(select salary from employees as of timestamp to_timestamp('17.11.2022 09:34','dd.mm.yyyy hh24:mi') where employee_id=e.employee_id);
+
+
+/*41.
+Stwórz trigger który uniemo¿liwi zmiane wynagrodzenia w tabelce employees na mniejsze ni¿ jest aktualnie.
+Trigger ma wyœwietlaæ odpowiedni komunikat a w wierszu przywracaæ stare wynagrodzenie lub uniemo¿liwiaæ jego 
+zmianê.
+*/
+
+
+
