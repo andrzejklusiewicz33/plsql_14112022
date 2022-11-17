@@ -3304,3 +3304,34 @@ select count(*) from wielka;
 wyœwietl aktualny czas 
 */
 execute dbms_output.put_line(systimestamp);
+/
+
+
+
+declare
+cursor k is select * from wielka;
+type tablica is table of wielka%rowtype index by binary_integer;
+tab tablica;
+begin
+dbms_output.put_line(systimestamp);
+for w in k loop
+    tab(k%rowcount):=w;
+end loop;
+dbms_output.put_line(systimestamp);
+end;
+/
+
+
+
+
+declare
+cursor k is select * from wielka;
+type tablica is table of wielka%rowtype index by binary_integer;
+tab tablica;
+begin
+dbms_output.put_line(systimestamp);
+open k;
+fetch k bulk collect into tab;
+close k;
+dbms_output.put_line(systimestamp);
+end;
