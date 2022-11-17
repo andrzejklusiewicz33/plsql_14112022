@@ -3257,3 +3257,50 @@ execute inicjalizacja.ile;
 Stwórz pakiet zawieraj¹cy tablicê elementów typu employees%rowtype. Zadbaj o to by przy pierwszym odwolaniu 
 do pakietu do tej tablicy byly ladowane dane. Dodaj do pakietu procedure ktora wyswietli ile mamy elementów w tablicy.
 */
+
+create or replace package cwiczenie51 is
+cursor k is select * from employees;
+type tablica is table of k%rowtype index by binary_integer;
+tab tablica;
+procedure ile;
+end;
+/
+
+create or replace package body cwiczenie51 is 
+procedure ile is 
+begin
+dbms_output.put_line('ilosc='||tab.count);
+end;
+
+begin
+for w in k loop
+    tab(k%rowcount):=w;
+end loop;
+end;
+/
+
+execute cwiczenie51.ile;
+/
+
+--przerwa do 14:44
+
+drop table wielka;
+/
+
+create table wielka as select * from employees;
+/
+begin
+for x in 1..14 loop
+    insert into wielka select * from wielka;
+    commit;
+end loop;
+end;
+/
+select count(*) from wielka;
+/
+
+/*52.
+(preludium do operacji masowych) Wczytaj do tablicy ca³¹ zawartoœæ tabeli wielka wiersz po wierszu. Przed i po ³adowaniu ca³oœci
+wyœwietl aktualny czas 
+*/
+execute dbms_output.put_line(systimestamp);
