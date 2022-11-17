@@ -2825,3 +2825,73 @@ end;
 /*43.
 Stwórz tablicê zawierajaca 10 kolejnych poteg liczby 2, nastêpnie przeiteruj po tej tablicy i wyswietl jej elementy
 */
+
+declare
+type tablica is table of integer index by binary_integer;
+tab tablica;
+begin
+for x in 1..10 loop
+      tab(x):=power(2,x);  
+end loop;
+for x in tab.first..tab.last loop
+    dbms_output.put_line(tab(x));
+end loop;
+end;
+/
+
+declare
+cursor k is select * from departments;
+type tablica is table of departments%rowtype index by binary_integer;
+tab tablica;
+x integer:=0;
+begin
+    for w in k loop
+    x:=x+1;
+    tab(x):=w;
+    end loop;
+    for i in tab.first..tab.last loop
+        dbms_output.put_line(tab(i).department_name);
+    end loop;
+end;
+/
+
+
+
+declare
+cursor k is select * from departments;
+type tablica is table of departments%rowtype index by binary_integer;
+tab tablica;
+begin
+    for w in k loop    
+    tab(k%rowcount):=w;
+    end loop;
+    for i in tab.first..tab.last loop
+        dbms_output.put_line(tab(i).department_name);
+    end loop;
+end;
+/
+
+
+declare
+cursor k is select department_name,city from departments join locations using(location_id);
+type tablica is table of k%rowtype index by binary_integer;
+tab tablica;
+begin
+    for w in k loop    
+    tab(k%rowcount):=w;
+    end loop;
+    for i in tab.first..tab.last loop
+        dbms_output.put_line(tab(i).department_name||' '||tab(i).city);
+    end loop;
+end;
+/
+
+/*
+44. Korzystajac z kursora wczytaj dane wszystkich pracownikow do tablicy. Nastepnie przeiteruj 
+po tablicy i wyœwietl imiona i nazwiska z jej elementów.
+Podpowiedzi:
+Mo¿na tak deklarowaæ tablicê :
+type tablica is table of employees%rowtype index by binary_integer;
+a tak mo¿na w kodzie przypisywaæ:
+tab(x):=w
+*/
