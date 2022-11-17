@@ -3335,3 +3335,131 @@ fetch k bulk collect into tab;
 close k;
 dbms_output.put_line(systimestamp);
 end;
+/
+
+insert into wielka select * from wielka;
+insert into wielka select * from wielka;
+insert into wielka select * from wielka;
+
+select count(*) from wielka;
+
+
+declare
+cursor k is select * from wielka;
+type tablica is table of wielka%rowtype index by binary_integer;
+tab tablica;
+begin
+dbms_output.put_line(systimestamp);
+open k;
+fetch k bulk collect into tab;
+close k;
+dbms_output.put_line(systimestamp);
+end;
+/
+
+
+
+
+declare
+cursor k is select * from wielka;
+type tablica is table of wielka%rowtype index by binary_integer;
+tab tablica;
+begin
+dbms_output.put_line(systimestamp);
+open k;
+loop
+exit when k%notfound;
+fetch k bulk collect into tab limit 1000000;
+dbms_output.put_line(tab.count); ---tutaj jakies operacje na danych
+--zrob_cos_z_danymi(tab);
+end loop;
+close k;
+dbms_output.put_line(systimestamp);
+end;
+/
+
+
+create table duza as select * from employees;
+
+/
+
+begin
+for x in 1..12 loop
+    insert into duza select * from duza;
+    commit;
+end loop;
+end;
+/
+
+select count(*) from duza;
+
+insert into duza select * from duza;
+commit;
+/
+
+
+declare
+type tablica is table of duza%rowtype index by binary_Integer;
+tab  tablica;
+cursor k is select * from duza;
+begin
+for w in k loop
+    tab(k%rowcount):=w;
+end loop;
+for x in tab.first..tab.last loop
+    insert into pusta values tab(x);
+end loop;
+commit;
+end;
+
+create table pusta as select * from employees where 1=2;
+select * from pusta;
+/
+
+
+declare
+type tablica is table of duza%rowtype index by binary_Integer;
+tab  tablica;
+cursor k is select * from duza;
+begin
+dbms_output.put_line(systimestamp);
+for w in k loop
+    tab(k%rowcount):=w;
+end loop;
+---operacje na tablicy
+for x in tab.first..tab.last loop
+    insert into pusta values tab(x);
+end loop;
+commit;
+dbms_output.put_line(systimestamp);
+end;
+/
+
+truncate table pusta;
+/
+declare
+type tablica is table of duza%rowtype index by binary_Integer;
+tab  tablica;
+cursor k is select * from duza;
+begin
+dbms_output.put_line(systimestamp);
+open k;
+fetch k bulk collect into tab;
+close k;
+---operacje na tablicy
+forall x in tab.first..tab.last insert into pusta  values tab(x);
+commit;
+dbms_output.put_line(systimestamp);
+end;
+
+select 8/120 from dual;
+/
+
+insert into pusta select * from duza;
+/
+
+/*53.
+ Stwórz pakiet zawieraj¹cy funkcjê która za³aduje do tablicy (i potem zwróci t¹ tablicê)
+ za pomoc¹ operacji masowych wynik zapytania zwracajacego listê nazwisk i nazw departamentów z tabel wielka i departments.
+Odbierz zwracane przez funkcjê dane w bloku anonimowym i wyswietl ilosc elementow w tablicy.
+*/
