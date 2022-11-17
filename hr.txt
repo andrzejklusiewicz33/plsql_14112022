@@ -2895,3 +2895,44 @@ type tablica is table of employees%rowtype index by binary_integer;
 a tak mo¿na w kodzie przypisywaæ:
 tab(x):=w
 */
+
+
+declare
+begin
+for w in k loop
+    tab(k%rowcount):=w;
+end loop;
+for x in tab.first..tab.last loop
+    dbms_output.put_line(tab(x).first_name||' '||tab(x).last_name);
+end loop;
+end;
+/
+
+
+create or replace package nadane is
+cursor k is select * from employees; 
+type tablica is table of employees%rowtype index by binary_integer;
+tab tablica;
+end;
+/
+
+declare
+begin
+for w in nadane.k loop
+    nadane.tab(nadane.k%rowcount):=w;
+end loop;
+end;
+/
+
+begin
+dbms_output.put_line(nadane.tab.count);
+end;
+/
+
+
+/*45.
+Wczytaj do tablicy wynik zapytania z nazwami departamentow i liczbie pracownikow w nich.
+Nastêpnie przeiteruj po tej liœcie i wyœwietl zawartoœæ elementów
+*/
+
+select department_name,count(*) from employees join departments using(department_id) group by department_name order by 2 desc;
