@@ -3053,3 +3053,64 @@ end;
 Napisz procedurê która przyjmie przez argument tablicê elementów typu employees%rowtype i wyœwietli nazwiska i imiona
 z wszystkich elementów. Przetestuj tê procedurê uruchamiajac ja i podajac jej tak¹ tablicê z danymi.
 */
+
+create or replace package cwiczenie48 is
+type tablica is table of employees%rowtype index by binary_integer;
+end;
+/
+
+create or replace procedure cwiczenie48_drukowanie(tab cwiczenie48.tablica) is
+begin
+    for x in tab.first..tab.last loop
+        dbms_output.put_line(tab(x).first_name||' '||tab(x).last_name);
+    end loop;
+end;
+/
+
+declare
+cursor k is select * from employees;
+tab cwiczenie48.tablica;
+begin
+for w in k loop
+tab(k%rowcount):=w;
+end loop;
+cwiczenie48_drukowanie(tab);
+end;
+/
+
+
+
+
+create or replace package cwiczenie48 is
+cursor k is select * from employees;
+type tablica is table of k%rowtype index by binary_integer;
+end;
+/
+
+create or replace procedure cwiczenie48_drukowanie(tab cwiczenie48.tablica) is
+begin
+    for x in tab.first..tab.last loop
+        dbms_output.put_line(tab(x).first_name||' '||tab(x).last_name);
+    end loop;
+end;
+/
+
+declare
+tab cwiczenie48.tablica;
+begin
+for w in cwiczenie48.k loop
+tab(cwiczenie48.k%rowcount):=w;
+end loop;
+cwiczenie48_drukowanie(tab);
+end;
+/
+
+select * from user_source;
+/
+
+--PRZERWA OBIADOWA DO 13:04
+
+/*49.
+Stwórz funkcjê która zwróci pod postaci¹ zmiennej typu rekordowego sumê, œredni¹ i maksymalne zarobki w calej firmie.
+Przetestuj jej dzialanie odbierajac dane i wyswietlajac je na konsoli
+*/
