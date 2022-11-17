@@ -2935,4 +2935,55 @@ Wczytaj do tablicy wynik zapytania z nazwami departamentow i liczbie pracownikow
 Nastêpnie przeiteruj po tej liœcie i wyœwietl zawartoœæ elementów
 */
 
-select department_name,count(*) from employees join departments using(department_id) group by department_name order by 2 desc;
+declare
+cursor k is
+select department_name,count(*) liczba from employees join departments using(department_id) group by department_name order by 2 desc;
+type tablica is table of k%rowtype index by binary_integer;
+tab tablica;
+begin
+for w in k loop
+    tab(k%rowcount):=w;
+end loop;
+for x in tab.first..tab.last loop
+    dbms_output.put_line(tab(x).department_name||' '||tab(x).liczba);
+end loop;
+end;
+
+--przerwa do 11:33
+
+/
+create or replace package typy is
+type tablica is table of varchar2(400) index by binary_integer;
+end;
+/
+create or replace function daj_dane return typy.tablica is 
+tab typy.tablica;
+begin
+    for x in 1..10 loop
+        tab(x):='element numer '||x;
+    end loop;
+    return tab;
+end;
+/
+
+create or replace procedure drukuj_dane(tab typy.tablica) is 
+begin
+    for x in tab.first..tab.last loop
+        dbms_output.put_line(tab(x));
+    end loop;
+end;
+/
+execute drukuj_dane(daj_dane);
+/
+declare
+tab typy.tablica;
+begin
+tab:=daj_dane;
+drukuj_dane(tab);
+end;
+/
+
+/*
+46. Napisz funkcjê która zwróci pod postacia tablicy tyle poteg liczby 2 ile podamy przez argument tej funkcji.
+W bloku anonimowym odbierz tablice od funkcji i wyswietl jej zawartosc
+*/
