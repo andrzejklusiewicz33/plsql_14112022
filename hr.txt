@@ -3463,3 +3463,12 @@ insert into pusta select * from duza;
  za pomoc¹ operacji masowych wynik zapytania zwracajacego listê nazwisk i nazw departamentów z tabel wielka i departments.
 Odbierz zwracane przez funkcjê dane w bloku anonimowym i wyswietl ilosc elementow w tablicy.
 */
+
+select last_name,department_name from duza join departments using(department_id);
+
+create or replace package cwiczenie53 is 
+cursor k is select last_name,department_name from duza join departments using(department_id);
+type tablica is table of k%rowtype index by binary_integer;
+function dane return tablica;
+end;
+/
