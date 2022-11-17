@@ -2646,3 +2646,26 @@ update employees set salary=salary+133;
 select * from zmiany_wynagrodzen;
 
 --klusiewicz@jsystems.pl
+
+
+create table abc (id integer, tekst varchar2(4000));
+
+create or replace trigger abc_trigger 
+before insert on abc
+for each row
+begin
+:new.tekst:='wstawione przez trigger';
+end;
+/
+
+insert into abc(id) values (10);
+select * from abc;
+
+/
+
+/*40.
+Stwórz trigger który bêdzie automagicznie uzupe³nia³ wartoœci klucza g³ównego tabeli regions za pomoc¹ sekwencji przy wstawianiu
+wiersza do tej tabeli.
+*/
+
+select * from regions;
