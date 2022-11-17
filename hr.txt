@@ -3114,3 +3114,15 @@ select * from user_source;
 Stwórz funkcjê która zwróci pod postaci¹ zmiennej typu rekordowego sumê, œredni¹ i maksymalne zarobki w calej firmie.
 Przetestuj jej dzialanie odbierajac dane i wyswietlajac je na konsoli
 */
+
+create or replace package cwiczenie49 is
+type rekordowy is record(
+    suma number,
+    srednia number,
+    maksymalne number
+);
+end;
+/
+
+create or replace function oddaj_rekord return cwiczenie49.rekordowy is .....
+
