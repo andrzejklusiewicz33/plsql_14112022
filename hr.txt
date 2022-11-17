@@ -2807,3 +2807,21 @@ end;
 Stwórz tablicê 100 elementów tekstowych. Kazdy element ma zawierac ciag "element numer x" gdzie x bêdzie numerem 
 tego elementu. Nastepnie przeiteruj po tablicy i wyswietl po kolei zawartosc wszystkich jej elementów.
 */
+/
+declare
+type tablica is table of varchar2(4000) index by binary_integer;
+tab tablica;
+begin
+for x in 1..100 loop
+    tab(x):='element numer '||x;
+end loop;
+for i in tab.first..tab.last loop
+    dbms_output.put_line(tab(i));
+end loop;
+end;
+/
+
+
+/*43.
+Stwórz tablicê zawierajaca 10 kolejnych poteg liczby 2, nastêpnie przeiteruj po tej tablicy i wyswietl jej elementy
+*/
