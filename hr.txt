@@ -2987,3 +2987,32 @@ end;
 46. Napisz funkcjê która zwróci pod postacia tablicy tyle poteg liczby 2 ile podamy przez argument tej funkcji.
 W bloku anonimowym odbierz tablice od funkcji i wyswietl jej zawartosc
 */
+
+create or replace package typy is 
+type tablica is table of integer index by binary_integer;
+end;
+/
+
+create or replace function potegi(mv integer) return typy.tablica is 
+tab typy.tablica;
+begin
+    for x in 1..mv loop
+        tab(x):=power(2,x);
+    end loop;
+    return tab;
+end;
+/
+
+declare
+tab typy.tablica;
+begin
+tab:=potegi(100);
+for x in tab.first..tab.last loop
+    dbms_output.put_line(tab(x));
+end loop;
+end;
+/
+
+/*47.
+Napisz funkcjê która zwróci cala zawartosc tabeli departments w postaci tablicy. Odbierz tablicê i wyswietl jej zawartosc
+*/
