@@ -4126,3 +4126,6 @@ nazwisko varchar2(4000)
 select * from ludzie;
 /
 
+/*67.
+Stwórz tabelkê i wczytaj do niej za pomoc¹ sql loadera zawartosc pliku kontakty.csv
+*/
