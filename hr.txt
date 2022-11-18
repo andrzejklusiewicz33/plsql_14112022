@@ -4088,11 +4088,14 @@ W pliku powinna znajdowac sie lista imion, nazwisk i telefonów  osob z tego depa
 declare
 cursor departamenty is 
 select * from departments where department_id in (select department_id from employees);
+cursor pracownicy(did integer) is select first_name,last_name,phone_number from employees where department_id=did;
 plik utl_file.file_type;
 begin
     for d in departamenty loop
         plik:=utl_file.fopen('DANE',D.DEPARTMENT_NAME||'.csv','W');
+        for p in pracownicy(d.department_id) loop
         
+        end loop;
         UTL_FILE.FCLOSE(PLIK);
     end loop;
 end;
