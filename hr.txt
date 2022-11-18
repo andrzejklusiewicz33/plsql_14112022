@@ -3624,3 +3624,20 @@ END;
 /*56.
 Napisz funkcjê która zwróci liczbe wierszy z tabeli employees spe³niajacych warunki przekazane przez argument tej funkcji.
 */
+
+CREATE OR REPLACE FUNCTION ILOSC_PRACOWNIKOW(WAR VARCHAR2) RETURN INTEGER IS 
+ZAPYTANIE VARCHAR2(4000);
+X INTEGER;
+BEGIN
+ZAPYTANIE:='SELECT COUNT(*) FROM EMPLOYEES '||WAR;
+EXECUTE IMMEDIATE ZAPYTANIE INTO X;
+RETURN X;
+END;
+/
+
+SELECT ILOSC_PRACOWNIKOW('WHERE COMMISSION_PCT IS NOT NULL') FROM DUAL;
+
+/*57.
+Napisz procedurê która przyjmie przez argument warunki filtracji po tabelce employees. Procedura ma wczytywaæ do zmiennej typu 
+rekordowego a nastepnie wypisac na konsoli ilosc pracownikow, srednie zarobki i maksymalne zarobki dla osob spelniajacych warunki filtracji
+*/
