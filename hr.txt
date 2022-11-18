@@ -3957,5 +3957,27 @@ którego numer zostanie podany przez czwarty argument. Przetestuj dzia³anie proce
 
 CREATE OR REPLACE PROCEDURE CW62(SREDNIA OUT NUMBER,SUMA OUT NUMBER, NAZWA OUT VARCHAR2,DID INTEGER) IS 
 BEGIN
-NULL;
+SELECT AVG(sALARY),SUM(SALARY),DEPARTMENT_NAME 
+INTO SREDNIA,SUMA,NAZWA
+FROM EMPLOYEES JOIN DEPARTMENTS USING(DEPARTMENT_ID)
+WHERE DEPARTMENT_ID=DID
+GROUP BY DEPARTMENT_NAME;
 END;
+
+/
+DECLARE
+A NUMBER;
+B NUMBER;
+C VARCHAR2(4000);
+BEGIN
+CW62(A,B,C,90);
+DBMS_OUTPUT.PUT_LINE('SREDNIA: '||A);
+DBMS_OUTPUT.PUT_LINE('SUMA: '||B);
+DBMS_OUTPUT.PUT_LINE('DEPARTAMENT: '||C);
+END;
+/
+
+/*63.
+ Stwórz procedurê która przyjmie wartoœæ zmiennoprzecinkow¹ przez parametr typu in out i tym samym parametrem
+zwróci tê wartoœæ ale zaokr¹glon¹ do 2 miejsc po przecinku. Przetestuj dzia³anie procedury.
+*/
