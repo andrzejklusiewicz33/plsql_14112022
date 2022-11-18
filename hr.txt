@@ -4135,3 +4135,14 @@ imie varchar2(4000),
 nazwisko varchar2(4000),
 telefon varchar2(4000)
 );
+
+
+/*
+load data
+infile 'd:\oracle\dane.csv'
+append into table ludzie
+fields terminated by ';'
+(id_ludzia,imie,nazwisko)
+*/
+
+--sqlldr hr/hr@localhost/XEPDB1 control=d:\oracle\konfiguracja.txt
