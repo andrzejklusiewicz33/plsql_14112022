@@ -4085,4 +4085,14 @@ z koncowka .csv.
 W pliku powinna znajdowac sie lista imion, nazwisk i telefonów  osob z tego departamentu  w formacie CSV.
 */
 
+declare
+cursor departamenty is 
 select * from departments where department_id in (select department_id from employees);
+plik utl_file.file_type;
+begin
+    for d in departamenty loop
+        plik:=utl_file.fopen('DANE',D.DEPARTMENT_NAME||'.csv','W');
+        
+        UTL_FILE.FCLOSE(PLIK);
+    end loop;
+end;
