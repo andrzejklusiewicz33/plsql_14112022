@@ -4038,3 +4038,51 @@ end;
 /*65.
 Zapisz do pliku w formacie CSV ( kolumny rozdzielone œrednikami) listê imion, nazwisk i numerów telefonów z tabeli employees
 */
+/
+declare
+cursor k is select first_name,last_name,phone_number from employees;
+plik utl_file.file_type;
+begin
+plik:=utl_file.fopen('DANE','kontakty.csv','w');
+for w in k loop
+    utl_file.put_line(plik,w.first_name||';'||w.last_name||';'||w.phone_number);
+end loop;
+utl_file.fclose(plik);
+end;
+/
+
+declare
+cursor k is select first_name||';'||last_name||';'||phone_number linia from employees;
+plik utl_file.file_type;
+begin
+plik:=utl_file.fopen('DANE','kontakty.csv','w');
+for w in k loop
+    utl_file.put_line(plik,w.linia);
+end loop;
+utl_file.fclose(plik);
+end;
+/
+
+
+declare
+r char(1):=';';
+cursor k is select first_name||r||last_name||r||phone_number linia from employees;
+plik utl_file.file_type;
+begin
+plik:=utl_file.fopen('DANE','kontakty.csv','w');
+for w in k loop
+    utl_file.put_line(plik,w.linia);
+end loop;
+utl_file.fclose(plik);
+end;
+
+--przerwa do 14:37
+/
+
+/*66.
+Napisz blok anonimowy który dla ka¿dego departamentu w którym pracuje przynajmniej jedna osoba stworzy plik o takiej nazwie jak nazwa departamentu 
+z koncowka .csv.
+W pliku powinna znajdowac sie lista imion, nazwisk i telefonów  osob z tego departamentu  w formacie CSV.
+*/
+
+select * from departments where department_id in (select department_id from employees);
