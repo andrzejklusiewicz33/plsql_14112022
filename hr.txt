@@ -3954,3 +3954,8 @@ END;
 Stwórz procedurê która przez trzy parametry typu out zwróci srednie zarobki, sumê zarobków i nazwê departamentu
 którego numer zostanie podany przez czwarty argument. Przetestuj dzia³anie procedury.
 */
+
+CREATE OR REPLACE PROCEDURE CW62(SREDNIA OUT NUMBER,SUMA OUT NUMBER, NAZWA OUT VARCHAR2,DID INTEGER) IS 
+BEGIN
+NULL;
+END;
