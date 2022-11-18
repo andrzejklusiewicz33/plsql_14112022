@@ -4094,8 +4094,35 @@ begin
     for d in departamenty loop
         plik:=utl_file.fopen('DANE',D.DEPARTMENT_NAME||'.csv','W');
         for p in pracownicy(d.department_id) loop
-        
+            utl_file.put_line(plik,p.first_name||';'||p.last_name||';'||p.phone_number);
         end loop;
         UTL_FILE.FCLOSE(PLIK);
     end loop;
 end;
+/
+
+declare
+plik utl_file.file_type;
+linia varchar2(4000);
+begin
+plik:=utl_file.fopen('DANE','dane.csv','r');
+loop
+utl_file.get_line(plik,linia);
+dbms_output.put_line(linia);
+dbms_output.put_line(substr(linia,1,instr(linia,';')));
+end loop;
+exception 
+when no_data_found then utl_file.fclose(plik);
+end;
+/
+
+create table ludzie(
+id_ludzia integer primary key,
+imie varchar2(4000),
+nazwisko varchar2(4000)
+);
+/
+
+select * from ludzie;
+/
+
