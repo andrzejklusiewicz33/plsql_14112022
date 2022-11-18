@@ -3490,4 +3490,37 @@ begin
 tab:=cwiczenie53.dane;
 dbms_output.put_line(tab.count);
 end;
+/
+--dbeaver
 
+
+create global temporary table tymczas1(
+pole1 varchar2(4000)
+);
+
+
+create global temporary table tymczas2(
+pole1 varchar2(4000)
+) on commit delete rows;
+
+
+create global temporary table tymczas3(
+pole1 varchar2(4000)
+) on commit preserve rows;
+/
+insert into tymczas1 values ('informacja');
+insert into tymczas2 values ('informacja');
+insert into tymczas3 values ('informacja');
+
+select * from tymczas1;
+select * from tymczas2;
+select * from tymczas3;
+commit;
+/
+
+/*54.
+Stwórz tabelê tymczasow¹ zawieraj¹c¹ wynik zapytania zwracaj¹cego nazwy departamentów i liczbê pracowników w nich.
+Co jest w œrodku?
+*/
+
+create table abc as select ....
