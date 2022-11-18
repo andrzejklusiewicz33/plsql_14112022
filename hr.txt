@@ -3863,4 +3863,26 @@ jednostki programowe do trybu natywnego. S³ownik zawieraj¹cy listing wszystkich 
 programowych pl/sql: user_plsql_object_settings. Pomiñ kompilacjê elementów typu 
 package body i type oraz procedury któr¹ w³aœnie tworzysz.
 */
+--SQLERRM
+--SQLCODE
 
+CREATE OR REPLACE PROCEDURE KOMPILACJA_NATYWNA IS 
+CURSOR K IS 
+SELECT * FROM USER_PLSQL_OBJECT_SETTINGS WHERE TYPE NOT IN ('PACKAGE BODY','TYPE') AND NAME<>'KOMPILACJA_NATYWNA';
+ZAP VARCHAR2(4000);
+BEGIN
+EXECUTE IMMEDIATE 'ALTER SESSION SET PLSQL_CODE_TYPE=NATIVE';
+FOR W IN K LOOP
+    BEGIN
+        ZAP:='ALTER '||W.TYPE||' '||W.NAME||' COMPILE';
+        DBMS_OUTPUT.PUT_LINE('OK: '||ZAP);
+        EXECUTE IMMEDIATE ZAP;
+    EXCEPTION
+        WHEN OTHERS THEN DBMS_OUTPUT.PUT_LINE('!!!!! B£¥D: '||ZAP);
+    END;
+END LOOP;
+END;
+/
+
+EXECUTE KOMPILACJA_NATYWNA;
+SELECT * FROM USER_PLSQL_OBJECT_SETTINGS;
