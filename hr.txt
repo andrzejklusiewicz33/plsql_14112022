@@ -3641,3 +3641,30 @@ SELECT ILOSC_PRACOWNIKOW('WHERE COMMISSION_PCT IS NOT NULL') FROM DUAL;
 Napisz procedurê która przyjmie przez argument warunki filtracji po tabelce employees. Procedura ma wczytywaæ do zmiennej typu 
 rekordowego a nastepnie wypisac na konsoli ilosc pracownikow, srednie zarobki i maksymalne zarobki dla osob spelniajacych warunki filtracji
 */
+/
+CREATE OR REPLACE PROCEDURE INFO(WARUNKI VARCHAR2) IS
+ZAPYTANIE VARCHAR2(4000);
+TYPE REKORDOWY IS RECORD(
+LICZBA INTEGER,
+SREDNIA NUMBER,
+MAKSI NUMBER
+);
+REK REKORDOWY;
+BEGIN
+ZAPYTANIE:='SELECT COUNT(*),ROUND(AVG(SALARY)),MAX(SALARY) FROM EMPLOYEES '||WARUNKI;
+DBMS_OUTPUT.PUT_LINE(ZAPYTANIE);
+EXECUTE IMMEDIATE ZAPYTANIE INTO REK;
+DBMS_OUTPUT.PUT_LINE(REK.LICZBA);
+DBMS_OUTPUT.PUT_LINE(REK.SREDNIA);
+DBMS_OUTPUT.PUT_LINE(REK.MAKSI);
+END;
+/
+EXECUTE  INFO('WHERE DEPARTMENT_ID=90');
+
+
+--PRZERWA DO 10:36
+
+/*58.
+Napisz blok anonimowy który korzystajac z sql dynamicznego wczyta wiersz pracownika którego numer zostanie przekazany przez uzytkownika.
+Program ma na konsoli wyswietlic imie, nazwisko i numer telefonu odczytanego pracownika.
+*/
