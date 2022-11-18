@@ -3822,3 +3822,45 @@ END;
 Napisz procedurê która bêdzie wyœwietla³a na konsoli listê numerów pracowników, imion i nazwisk osób spe³niaj¹cych 
 warunki podane przez argument procedury. Dane wczytaj za pomoc¹ sql dynamicznego.
 */
+
+create or replace procedure cwiczenie60(warunki varchar2) is 
+k sys_refcursor;
+type rekordowy is record(
+    p1 varchar2(4000),
+    p2 varchar2(4000),
+    p3 varchar2(4000)
+);
+rek rekordowy;
+begin
+open k for 'select employee_id,first_name,last_name from employees '||warunki;
+loop
+exit when k%notfound;
+fetch k into rek;
+dbms_output.put_line(rek.p1||' '||rek.p2||' '||rek.p3);
+end loop;
+close k;
+end;
+/
+execute cwiczenie60('where department_id=50');
+
+--przerwa do 11:41
+
+
+select * from user_source;
+/
+
+select * from user_plsql_object_settings;
+alter session set plsql_code_type=native;
+alter session set plsql_code_type=interpreted;
+alter trigger abc_trigger compile;
+alter procedure add_job_history compile;
+alter package cwiczenie35 compile;
+/
+
+/*61.
+Stwórz procedurê która przekompiluje wszystkie posiadane przez Ciebie 
+jednostki programowe do trybu natywnego. S³ownik zawieraj¹cy listing wszystkich jednostek
+programowych pl/sql: user_plsql_object_settings. Pomiñ kompilacjê elementów typu 
+package body i type oraz procedury któr¹ w³aœnie tworzysz.
+*/
+
