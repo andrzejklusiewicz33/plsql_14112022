@@ -3524,3 +3524,67 @@ Co jest w œrodku?
 */
 
 create table abc as select ....
+
+drop table tymczas4;
+
+create global temporary table dupa on commit preserve rows as .....
+/
+
+
+create global temporary table raport_tymczas as 
+select department_name nazwa_departamentu,count(*) liczba_pracownikow
+from employees join departments using(department_Id)
+group by department_name;
+
+/
+
+select * from raport_tymczas;
+
+/
+
+
+create global temporary table raport_tymczas2 on commit preserve rows as 
+select department_name nazwa_departamentu,count(*) liczba_pracownikow
+from employees join departments using(department_Id)
+group by department_name;
+
+/
+select * from raport_tymczas2;
+select * FROM USER_VIEWS;
+/
+
+BEGIN
+EXECUTE IMMEDIATE 'CREATE SEQUENCE WHATEVER';
+END;
+/
+
+SELECT WHATEVER.NEXTVAL FROM DUAL;
+/
+
+DECLARE
+NAZWA VARCHAR2(4000):='JAS_FASOLA';
+BEGIN
+EXECUTE IMMEDIATE 'CREATE SEQUENCE '||NAZWA;
+END;
+/
+
+SELECT JAS_FASOLA.NEXTVAL FROM DUAL;
+/
+
+SELECT * FROM USER_DEPENDENCIES WHERE REFERENCED_TYPE='TABLE';
+
+CREATE OR REPLACE PROCEDURE TESTOWA IS
+BEGIN
+EXECUTE IMMEDIATE 'TO NIE SQL';
+END;
+/
+
+EXECUTE TESTOWA;
+/
+
+/*55.
+Napisz procedurê która przez argument dostanie wysokoœæ podwy¿ki i warunki where jako ci¹g tekstowy. Procedura ma daæ 
+podwy¿kê pracownikom spelniajacym warunki podane przez argument.
+*/
+
+EXECUTE PODWYZKA(1000,'WHERE COMMISSION_PCT IS NOT NULL');
