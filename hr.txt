@@ -4200,3 +4200,5 @@ select * from kontakty_ext;
 --https://andrzejklusiewicz.blogspot.com/2014/12/kurs-oracle-plsql-funkcje-strumieniowe.html
 
 --klusiewicz@jsystems.pl
+
+--https://github.com/andrzejklusiewicz33/plsql_14112022
