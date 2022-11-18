@@ -4146,3 +4146,34 @@ fields terminated by ';'
 */
 
 --sqlldr hr/hr@localhost/XEPDB1 control=d:\oracle\konfiguracja.txt
+
+
+select * from kontakty;
+/
+
+
+CREATE TABLE dane_ext (
+id integer,
+imie varchar2(4000),
+nazwisko varchar2(4000)
+)
+ORGANIZATION EXTERNAL (
+TYPE oracle_loader
+DEFAULT DIRECTORY dane
+ACCESS PARAMETERS(
+FIELDS TERMINATED BY ';'
+MISSING FIELD VALUES ARE NULL
+(id,imie,nazwisko)
+)
+LOCATION ('dane.csv')
+)
+REJECT LIMIT UNLIMITED;
+
+select * from all_directories;
+
+1;;Andrzej
+/
+select * from dane_ext;
+
+/*68.
+Zaloz tabele zewnetrzna na plik kontakty.csv*/
