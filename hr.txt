@@ -4177,3 +4177,26 @@ select * from dane_ext;
 
 /*68.
 Zaloz tabele zewnetrzna na plik kontakty.csv*/
+
+CREATE TABLE kontakty_ext (
+imie varchar2(4000),
+nazwisko varchar2(4000),
+telefon varchar2(4000)
+)
+ORGANIZATION EXTERNAL (
+TYPE oracle_loader
+DEFAULT DIRECTORY dane
+ACCESS PARAMETERS(
+FIELDS TERMINATED BY ';'
+MISSING FIELD VALUES ARE NULL
+(imie,nazwisko,telefon)
+)
+LOCATION ('kontakty.csv')
+)
+REJECT LIMIT UNLIMITED;
+
+select * from kontakty_ext;
+
+--https://andrzejklusiewicz.blogspot.com/2014/12/kurs-oracle-plsql-funkcje-strumieniowe.html
+
+--klusiewicz@jsystems.pl
