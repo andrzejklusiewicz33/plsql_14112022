@@ -4129,3 +4129,9 @@ select * from ludzie;
 /*67.
 Stwórz tabelkê i wczytaj do niej za pomoc¹ sql loadera zawartosc pliku kontakty.csv
 */
+
+create table kontakty (
+imie varchar2(4000),
+nazwisko varchar2(4000),
+telefon varchar2(4000)
+);
