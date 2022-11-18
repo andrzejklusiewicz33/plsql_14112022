@@ -3981,3 +3981,45 @@ END;
  Stwórz procedurê która przyjmie wartoœæ zmiennoprzecinkow¹ przez parametr typu in out i tym samym parametrem
 zwróci tê wartoœæ ale zaokr¹glon¹ do 2 miejsc po przecinku. Przetestuj dzia³anie procedury.
 */
+/
+create or  replace procedure zaokr(x in out number) is 
+begin
+x:=round(x,2);
+end;
+/
+
+declare
+e number:=10/3;
+begin
+dbms_output.put_line('przed='||e);
+zaokr(e);
+dbms_output.put_line('po='||e);
+end;
+/
+
+create database link chmura 
+connect to hr identified by szkolenie_jsystems_2021
+using '13.74.139.54/XEPDB1';
+/
+
+select * from employees@chmura;
+
+select * from employees@chmura join departments using(department_id);
+/
+
+select * from all_directories;
+
+/
+
+declare
+plik utl_file.file_type;
+begin
+plik:=utl_file.fopen('DANE','pliczek.txt','w');
+utl_file.put_line(plik,'treœæ');
+utl_file.fclose(plik);
+end;
+/
+
+/*64.
+Zapisz do pliku 100 kolejnych linii o treœci "linia numer 1" zwiêkszaj¹c numerek przy ka¿dej linii
+*/
