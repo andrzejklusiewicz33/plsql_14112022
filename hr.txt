@@ -4023,3 +4023,18 @@ end;
 /*64.
 Zapisz do pliku 100 kolejnych linii o treœci "linia numer 1" zwiêkszaj¹c numerek przy ka¿dej linii
 */
+
+
+declare
+plik utl_file.file_type;
+begin
+plik:=utl_file.fopen('DANE','linie.txt','w');
+for x in 1..100 loop
+    utl_file.put_line(plik,'linia numer '||x);
+end loop;
+utl_file.fclose(plik);
+end;
+
+/*65.
+Zapisz do pliku w formacie CSV ( kolumny rozdzielone œrednikami) listê imion, nazwisk i numerów telefonów z tabeli employees
+*/
